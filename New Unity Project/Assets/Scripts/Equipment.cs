@@ -1,8 +1,10 @@
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Equipment : MonoBehaviour
+[System.Serializable]
+public class Equipment
 {
 	
 	public float goldPrice;
@@ -10,6 +12,7 @@ public class Equipment : MonoBehaviour
 	public int level;
 	public int costUpgrade;
     public bool costGold;
+	public bool isCarried;
 	
 	public Equipment()
 	{
@@ -18,6 +21,7 @@ public class Equipment : MonoBehaviour
 		this.level = 1;
 		this.costUpgrade = 50;
 		this.costGold = true;
+		this.isCarried = false;
 	}
 	
 	private void updateCostUpgrade()
@@ -47,6 +51,6 @@ public class Equipment : MonoBehaviour
 	
 	public virtual string ParseToString()
 	{
-		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold;
+		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried;;
 	}
 }

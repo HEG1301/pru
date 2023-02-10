@@ -1,32 +1,44 @@
 using System.IO;
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class DataPlayer : MonoBehaviour
+
+//[System.Serializable]
+public class DataPlayer //: MonoBehaviour
 {
-	private float bestDepth;
-	private float numberOfMeterDive;
-	private float numberOfPredatorHunt;
-	private float numberOfDeathByAsphixy;
-	private float numberOfDeathByPredator;
-	private float numberOfDeathByObstacle;
-	private float numberOfDivingDone;
+	public float bestDepth;
+	public float numberOfMeterDive;
+	public float numberOfPredatorHunt;
+	public float numberOfDeathByAsphixy;
+	public float numberOfDeathByPredator;
+	public float numberOfDeathByObstacle;
+	public float numberOfDivingDone;
 	
-	private List<(Equipment,bool)> equipments; //taille max de 4 (palm,suit,oxygen equipment,defense equipment)
+	public List<Equipment> equipments;
 
-	private float maxLife;
-	private float maxApneeTime;
-	private float strenght;
+	public float maxLife;
+	public float maxApneeTime;
+	public float strenght;
 	
-	private int level;
-	private float curentExp;
-	private float nextMax;
-	private float gold;
-	private float gem;
+	public int level;
+	public float curentExp;
+	public float nextMax;
+	public float gold;
+	public float gem;
+	
+	public string name;
+	
+	public string Name
+	{
+		get {return this.name;}
+		set {this.name = value;}
+	}
 		
 	public DataPlayer()
 	{
+		this.name = "";
 		this.bestDepth = 0;
 		this.numberOfMeterDive = 0;
 		this.numberOfDeathByAsphixy = 0;
@@ -34,7 +46,7 @@ public class DataPlayer : MonoBehaviour
 		this.numberOfDeathByPredator = 0;
 		this.numberOfPredatorHunt = 0;
 		this.numberOfDivingDone = 0;
-		this.equipments = new List<(Equipment,bool)>{};
+		this.equipments = new List<Equipment>();
 		this.maxLife = 100;
 		this.maxApneeTime = 0.45f; //temps moyen d'une personne de 45 seconde
 		this.strenght = 10;
@@ -51,7 +63,7 @@ public class DataPlayer : MonoBehaviour
 	{
 		if (equipment.goldPrice <= this.gold && equipment.gemPrice <= this.gem)
 		{
-			this.equipments.Add((equipment,false));
+			this.equipments.Add(equipment);
 			this.gold -= equipment.goldPrice;
 			this.gem -= equipment.gemPrice;
 			return true;
@@ -82,12 +94,12 @@ public class DataPlayer : MonoBehaviour
 	
 	public void saveData()
 	{
-		string path = Application.persistentDataPath + "/player.json";
+		string path = Application.persistentDataPath + "/" + this.name+ "_data.json";
 		string data = JsonUtility.ToJson(this,prettyPrint:true);
 		File.WriteAllText(path,data);
 	}
 	
-	public DataPlayer loadData(string path)
+	public static DataPlayer loadData(string path)
 	{
 		string data = File.ReadAllText(path);
 		return JsonUtility.FromJson<DataPlayer>(data);

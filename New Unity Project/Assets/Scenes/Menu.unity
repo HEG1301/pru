@@ -576,7 +576,6 @@ GameObject:
   m_Component:
   - component: {fileID: 106746694}
   - component: {fileID: 106746696}
-  - component: {fileID: 106746695}
   m_Layer: 0
   m_Name: ScriptsCarrier
   m_TagString: Untagged
@@ -599,18 +598,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &106746695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106746693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a82d82e1f8b25054fbf88fe29b8e9e25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &106746696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2171,7 +2158,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 661357714}
   m_HandleRect: {fileID: 0}
@@ -3630,6 +3617,7 @@ GameObject:
   - component: {fileID: 1011036817}
   - component: {fileID: 1011036816}
   - component: {fileID: 1011036815}
+  - component: {fileID: 1011036819}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3722,6 +3710,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1011036819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011036814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65b569d36224f846b542f2b34b1aaae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  namePlayer: {fileID: 2029209147}
 --- !u!1 &1023165323
 GameObject:
   m_ObjectHideFlags: 0
@@ -6417,6 +6418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
