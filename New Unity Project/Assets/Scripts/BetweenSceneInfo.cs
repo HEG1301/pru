@@ -11,7 +11,7 @@ public class BetweenSceneInfo : MonoBehaviour
 	public static BetweenSceneInfo instance;
 	
 	
-	public string name;
+	public string _name;
 	public GameObject panel;
 	public TMP_InputField inputName;
 	public TMP_InputField inputAnswer;
@@ -53,8 +53,8 @@ public class BetweenSceneInfo : MonoBehaviour
 			case "true":
 				DontDestroyOnLoad(this.gameObject);
 				DataPlayer temp = new DataPlayer();
-				Debug.Log(temp);
-				temp.Name = name;
+				//Debug.Log(temp);
+				temp.Name = this._name;
 				temp.saveData();
 				StopAllCoroutines();
 				SceneManager.LoadScene(sceneName);
@@ -66,7 +66,7 @@ public class BetweenSceneInfo : MonoBehaviour
 			case "false":
 				inputName.GetComponent<TMP_InputField>().text = "";
 				inputAnswer.GetComponent<TMP_InputField>().text = "";
-				this.name = "";
+				this._name = "";
 				return true;
 			default:
 				return false;
@@ -76,9 +76,10 @@ public class BetweenSceneInfo : MonoBehaviour
 	public void GoToMenu()
 	{
 		string sceneName = "Menu";
-		this.name = inputName.GetComponent<TMP_InputField>().text;
-		Debug.Log(File.Exists(Application.persistentDataPath + "/" + this.name + "_data.json"));
-        if (!File.Exists(Application.persistentDataPath + "/" + this.name + "_data.json"))
+		this._name = inputName.GetComponent<TMP_InputField>().text;
+		Debug.Log(_name);
+		//Debug.Log(File.Exists(Application.persistentDataPath + "/" + this._name + "_data.json"));
+        if (!File.Exists(Application.persistentDataPath + "/" + this._name + "_data.json"))
 		{
 			Debug.Log("Creation nouveau compte");
 			this.panel.SetActive(true);

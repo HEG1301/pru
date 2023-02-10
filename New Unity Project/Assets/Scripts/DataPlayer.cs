@@ -9,6 +9,7 @@ using System.Collections.Generic;
 public class DataPlayer //: MonoBehaviour
 {
 	public float bestDepth;
+	public float bestScore;
 	public float numberOfMeterDive;
 	public float numberOfPredatorHunt;
 	public float numberOfDeathByAsphixy;
