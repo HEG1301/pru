@@ -42,8 +42,10 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Equipment.cs" />
+     <Compile Include="Assets\Scripts\BlockGeneration.cs" />
      <Compile Include="Assets\Scripts\Menu.cs" />
      <Compile Include="Assets\Scripts\BetweenSceneInfo.cs" />
+     <Compile Include="Assets\Scripts\Block.cs" />
      <Compile Include="Assets\Scripts\DataPlayer.cs" />
      <Compile Include="Assets\Scripts\Button_Input.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
