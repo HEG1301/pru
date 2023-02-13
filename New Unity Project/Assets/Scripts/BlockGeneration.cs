@@ -2,40 +2,47 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class BlockGeneration : MonoBehaviour
 {
-	private System.Random rdm;
 	public GameObject bloc;
+	public GameObject BorderRight;
+	public GameObject BorderLeft;
+	public Random rdm;
     // Start is called before the first frame update
     void Start()
     {
-		rdm = new System.Random();
-        create(new Vector3(0,0,0),"bloc 1");
-		Thread.Sleep(3000);
-		create(new Vector3(2,1,0),"bloc 2");
-		Thread.Sleep(3000);
-		create(new Vector3(1.5f,0.5f,0),"bloc 3");
-		Thread.Sleep(3000);
+		rdm = new Random();
     }
 
 
-	public void create(Vector3 pos,string name)
-	{
-		GameObject tmp = Instantiate(bloc,pos,Quaternion.identity);
-		tmp.name = name;
-		Debug.Log(name);
-		if (!tmp.GetComponent<Block>().verifCreation());
-		{
-			float x = rdm.Next(-3,3),y = rdm.Next(-3,3);
-			tmp.transform.position = new Vector3(tmp.transform.position.x+x,tmp.transform.position.y+y,0);
-			//yield return new WaitForSeconds(0.1f);
-		}
-	}
 
     // Update is called once per frame
     void Update()
     {
-       
+		if (Input.GetKeyUp(KeyCode.Space))
+			BorderRight.GetComponent<Border>().expand();
+		
+		if (Input.GetKeyUp(KeyCode.A))
+		{
+			Vector3[] extremity = BorderRight.GetComponent<Border>().getNewSectorExtremity();
+			Instantiate(bloc,extremity[0],Quaternion.identity);
+			Instantiate(bloc,extremity[1],Quaternion.identity);
+		}
+		if (Input.GetKeyUp(KeyCode.G))
+		{
+			Vector3[] extremityR = BorderRight.GetComponent<Border>().getNewSectorExtremity();
+			Vector3[] extremityL = BorderLeft.GetComponent<Border>().getNewSectorExtremity();
+			Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x,(int)extremityR[0].x),rdm.Next((int)extremityR[1].y,(int)extremityR[0].y),extremityL[0].z);
+			Instantiate(bloc,pos,Quaternion.identity);
+		}
+		if (Input.GetKeyUp(KeyCode.D))
+		{
+			Vector3[] extremityR = BorderRight.GetComponent<Border>().getYExtremity();
+			Vector3[] extremityL = BorderLeft.GetComponent<Border>().getYExtremity();
+			Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x,(int)extremityR[0].x),rdm.Next((int)extremityR[1].y,(int)extremityR[0].y),extremityL[0].z);
+			Instantiate(bloc,pos,Quaternion.identity);
+		}
     }
 }
