@@ -47,4 +47,11 @@ public class Border : MonoBehaviour
 		return new Vector3[]{top,bottom};
 	}
 	
+	public float newSectionArea(float startX)
+	{
+		float endX = this.gameObject.transform.position.x-this.gameObject.transform.localScale.x;
+		float width = Mathf.Abs(endX - startX);
+		return width * this.originalYScale;
+	}
+	
 }

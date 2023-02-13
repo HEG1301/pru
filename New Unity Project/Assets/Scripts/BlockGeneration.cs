@@ -44,5 +44,38 @@ public class BlockGeneration : MonoBehaviour
 			Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x,(int)extremityR[0].x),rdm.Next((int)extremityR[1].y,(int)extremityR[0].y),extremityL[0].z);
 			Instantiate(bloc,pos,Quaternion.identity);
 		}
+		if (Input.GetKeyUp(KeyCode.M))
+		{
+			generateNewSection();
+		}
     }
+	
+	public GameObject createRandomBloc(Vector3[] extremityR,Vector3[] extremityL)
+	{
+		Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x+(int)BorderLeft.transform.localScale.x-1,(int)extremityR[0].x-(int)BorderRight.transform.localScale.x)+1,rdm.Next((int)extremityR[1].y,(int)extremityR[0].y	),extremityL[0].z);
+		return Instantiate(bloc,pos,Quaternion.identity);
+	}
+	public void generateNewSection()
+	{		
+		Border ScriptRight = BorderRight.GetComponent<Border>();
+		Border ScriptLeft = BorderLeft.GetComponent<Border>();
+		int i = 0;
+		int limit = (int)(ScriptRight.newSectionArea(this.BorderLeft.transform.position.x+this.BorderLeft.transform.localScale.x));
+		limit = (int)(limit * 0.4f);
+		Debug.Log(limit);
+		while (i < limit)
+		{
+			GameObject tmp = createRandomBloc(ScriptRight.getNewSectorExtremity(),ScriptLeft.getNewSectorExtremity());
+			tmp.name = "Block" + i;
+			if (tmp.GetComponent<Block>().checkAlone())
+			{
+				i += tmp.GetComponent<Block>().blockArea();
+			}
+			else
+			{
+				Destroy(tmp);
+			}
+		}
+		Debug.Log(i);
+	}
 }
