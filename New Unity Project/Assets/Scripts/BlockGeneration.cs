@@ -10,9 +10,11 @@ public class BlockGeneration : MonoBehaviour
 	public GameObject BorderRight;
 	public GameObject BorderLeft;
 	public Random rdm;
+	public int conteur;
     // Start is called before the first frame update
     void Start()
     {
+		conteur = 0;
 		rdm = new Random();
     }
 
@@ -30,22 +32,30 @@ public class BlockGeneration : MonoBehaviour
 		if (Input.GetKeyUp(KeyCode.A))
 		{
 			Vector3[] extremity = BorderRight.GetComponent<Border>().getNewSectorExtremity();
-			Instantiate(bloc,extremity[0],Quaternion.identity);
-			Instantiate(bloc,extremity[1],Quaternion.identity);
+			GameObject tmp = Instantiate(bloc,extremity[0],Quaternion.identity);
+			tmp.name = "Block_" + conteur;
+			tmp = Instantiate(bloc,extremity[1],Quaternion.identity);
+			tmp.name = "Block_" + conteur;
+			conteur ++;
 		}
 		if (Input.GetKeyUp(KeyCode.G))
 		{
 			Vector3[] extremityR = BorderRight.GetComponent<Border>().getNewSectorExtremity();
 			Vector3[] extremityL = BorderLeft.GetComponent<Border>().getNewSectorExtremity();
 			Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x,(int)extremityR[0].x),rdm.Next((int)extremityR[1].y,(int)extremityR[0].y),extremityL[0].z);
-			Instantiate(bloc,pos,Quaternion.identity);
+			GameObject tmp = Instantiate(bloc,pos,Quaternion.identity);
+			tmp.name = "Block_" + conteur;
+			//tmp.GetComponent<Block>().checkAlone();
+			conteur ++;
 		}
 		if (Input.GetKeyUp(KeyCode.D))
 		{
 			Vector3[] extremityR = BorderRight.GetComponent<Border>().getYExtremity();
 			Vector3[] extremityL = BorderLeft.GetComponent<Border>().getYExtremity();
 			Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x,(int)extremityR[0].x),rdm.Next((int)extremityR[1].y,(int)extremityR[0].y),extremityL[0].z);
-			Instantiate(bloc,pos,Quaternion.identity);
+			GameObject tmp = Instantiate(bloc,pos,Quaternion.identity);
+			tmp.name = "Block_" + conteur;
+			conteur ++;
 		}
 		if (Input.GetKeyUp(KeyCode.M))
 		{
@@ -69,10 +79,11 @@ public class BlockGeneration : MonoBehaviour
 		while (i < limit)
 		{
 			GameObject tmp = createRandomBloc(ScriptRight.getNewSectorExtremity(),ScriptLeft.getNewSectorExtremity());
-			tmp.name = "Block" + i;
+			tmp.name = "Block_" + conteur;
 			if (tmp.GetComponent<Block>().checkAlone())
 			{
 				i += tmp.GetComponent<Block>().blockArea();
+				conteur ++;
 			}
 			else
 			{
