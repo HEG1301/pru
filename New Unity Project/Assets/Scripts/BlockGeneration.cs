@@ -22,7 +22,10 @@ public class BlockGeneration : MonoBehaviour
     void Update()
     {
 		if (Input.GetKeyUp(KeyCode.Space))
+		{
 			BorderRight.GetComponent<Border>().expand();
+			BorderLeft.GetComponent<Border>().expand();
+		}
 		
 		if (Input.GetKeyUp(KeyCode.A))
 		{
@@ -61,7 +64,7 @@ public class BlockGeneration : MonoBehaviour
 		Border ScriptLeft = BorderLeft.GetComponent<Border>();
 		int i = 0;
 		int limit = (int)(ScriptRight.newSectionArea(this.BorderLeft.transform.position.x+this.BorderLeft.transform.localScale.x));
-		limit = (int)(limit * 0.4f);
+		limit = (int)(limit * 0.3f);
 		Debug.Log(limit);
 		while (i < limit)
 		{
