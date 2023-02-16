@@ -15,6 +15,7 @@ public class Block : MonoBehaviour
 	[SerializeField]
 	private float area;
 	public float deltaMove;
+	public int conteur = 0;
 	//public int nbrAngle;
 	public BlockGeneration scriptBlockGen;
 	public int nbrAngle;
@@ -24,7 +25,7 @@ public class Block : MonoBehaviour
 	void Start()
 	{
 		rdm = new Random();
-		Debug.Log(this.gameObject.name + "(" + this.gameObject.GetInstanceID() + ")");
+		//Debug.Log(this.gameObject.name + "(" + this.gameObject.GetInstanceID() + ")");
 		//Debug.Log(this.gameObject.GetComponent<Rigidbody>().collisionDetectionMode);
 		Physics.queriesHitTriggers = true;
 		this.nbrAngle = 16;
@@ -44,7 +45,12 @@ public class Block : MonoBehaviour
     {
         
     }
-	
+	/*
+	void OnTriggerEnter(Collider other)
+	{
+		this.conteur ++;
+	}
+	*/
 	void OnTriggerStay(Collider other)
 	{
 		if (other.gameObject.name != this.gameObject.name && other.gameObject.tag != "player")
@@ -56,18 +62,29 @@ public class Block : MonoBehaviour
 					this.scriptBlockGen.conteur --;
 					this.scriptBlockGen.i -= this.blockArea();
 				}
-				Debug.LogWarning(this.gameObject.name + "   " + other.gameObject.name);
+				//Debug.LogWarning(this.gameObject.name + "   " + other.gameObject.name);
+				if (this.conteur >= 120)
+				{
+					Debug.Log("destroy" + this.gameObject.name);
+					Destroy(this.gameObject);
+				}
 				tryMove(other);
 				//Destroy(this.gameObject);
 			}
 		}
 	}
+	/*
+	void OnTriggerExit(Collider other)
+	{
+		this.conteur --;
+	}
+	*/
 	
 	private void tryMove(Collider other)
 	{
 		Vector3 o_center = other.bounds.center;
 		Vector3 pos = this.gameObject.transform.position;
-		Debug.Log(o_center + " | " + pos);
+		//Debug.Log(o_center + " | " + pos);
 		int x = 0,y = 0;
 		if (pos == o_center)
 		{
@@ -100,15 +117,18 @@ public class Block : MonoBehaviour
 				pos.y -= this.deltaMove; // * Time.deltaTime;
 			}
 		}
-		if (previousAction[0][0] == x && previousAction[0][1] == y && previousAction[1][0] != x && previousAction[1][1] != y)
+		/*if (previousAction[0][0] == x && previousAction[0][1] == y && previousAction[1][0] != x && previousAction[1][1] != y)
 		{
-			Destroy(this.gameObject);
+			Debug.Log("Destroy    "  +this.gameObject.name);
+			this.gameObject.transform.position = pos;
+			//Destroy(this.gameObject);
 		}
 		else
-		{
+		{*/
+			conteur += 1;
 			this.gameObject.transform.position = pos;
 			previousAction = new int[][]{new int[]{previousAction[1][0],previousAction[1][1]},new int[]{x,y}};
-		}
+		//}
 		
 	}
 	

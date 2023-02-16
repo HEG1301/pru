@@ -88,21 +88,22 @@ public class BlockGeneration : MonoBehaviour
 		this.i = 0;
 		int limit = (int)(ScriptRight.newSectionArea(this.BorderLeft.transform.position.x+this.BorderLeft.transform.localScale.x));
 		limit = (int)(limit * 0.35f);
-		Debug.Log(limit);
+		//Debug.Log(limit);
 		while (i < limit)
 		{
 			GameObject tmp = createRandomBlock(ScriptRight.getNewSectorExtremity(),ScriptLeft.getNewSectorExtremity());
 			tmp.name = "Block_" + conteur;
-			if (tmp.GetComponent<Block>().checkAlone())
+			i += tmp.GetComponent<Block>().blockArea();
+			conteur ++;
+			/*if (tmp.GetComponent<Block>().checkAlone())
 			{
-				i += tmp.GetComponent<Block>().blockArea();
-				conteur ++;
+				
 			}
 			else
 			{
 				Destroy(tmp);
-			}
+			}*/
 		}
-		Debug.Log(i);
+		//Debug.Log(i);
 	}
 }
