@@ -2,25 +2,34 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Random = System.Random;
 
 
 public class Block : MonoBehaviour
 {
 	private const float Pi = Mathf.PI;
 	
-	public float width;
-	public float length;
-	
+	//private int[][] previousAction = new int[][]{{-1,-1},{-1,-1}};
+	private int[][] previousAction = new int[][]{new int[]{-1,-1},new int[]{-1,-1}};
+	[SerializeField]
+	private float area;
+	public float deltaMove;
+	//public int nbrAngle;
+	public BlockGeneration scriptBlockGen;
 	public int nbrAngle;
 	private float[] lengthRay;
+	private Random rdm;
 	
 	void Start()
 	{
+		rdm = new Random();
+		Debug.Log(this.gameObject.name + "(" + this.gameObject.GetInstanceID() + ")");
 		//Debug.Log(this.gameObject.GetComponent<Rigidbody>().collisionDetectionMode);
 		Physics.queriesHitTriggers = true;
 		this.nbrAngle = 16;
 		this.lengthRay = new float[nbrAngle];
-		this.gameObject.transform.localScale = new Vector3(width,length,0.2f);
+		//this.gameObject.transform.localScale = new Vector3(width,length,0.2f);
 		//this.gameObject.GetComponent<BoxCollider>().size = this.gameObject.transform.localScale;
 		/*for (int i = 0; i < nbrAngle; i++)
 		{
@@ -36,12 +45,71 @@ public class Block : MonoBehaviour
         
     }
 	
-	void OnTriggerEnter(Collider other)
+	void OnTriggerStay(Collider other)
 	{
-		if (other.gameObject.name != this.gameObject.name)
+		if (other.gameObject.name != this.gameObject.name && other.gameObject.tag != "player")
 		{
-			Debug.LogWarning("collide " + this.gameObject.transform.position + " | " + other.gameObject.transform.position + "  " + other.gameObject.name);
+			if (other.gameObject.GetInstanceID() > this.gameObject.GetInstanceID())
+			{
+				if (SceneManager.GetActiveScene().name != "TestingScene")
+				{
+					this.scriptBlockGen.conteur --;
+					this.scriptBlockGen.i -= this.blockArea();
+				}
+				Debug.LogWarning(this.gameObject.name + "   " + other.gameObject.name);
+				tryMove(other);
+				//Destroy(this.gameObject);
+			}
 		}
+	}
+	
+	private void tryMove(Collider other)
+	{
+		Vector3 o_center = other.bounds.center;
+		Vector3 pos = this.gameObject.transform.position;
+		Debug.Log(o_center + " | " + pos);
+		int x = 0,y = 0;
+		if (pos == o_center)
+		{
+			int dir = rdm.Next(0,4);
+			if ((float)dir/2f >= 1f)
+				pos.x += dir%2*(-1)*other.bounds.size.x; //*Time.deltaTime;
+			else
+				pos.y += dir%2*(-1)*other.bounds.size.y; //* Time.deltaTime;
+		}
+		else
+		{
+			if (this.gameObject.transform.position.x > o_center.x)
+			{
+				x = 1;
+				pos.x += this.deltaMove; // * Time.deltaTime;
+			}
+			else if (this.gameObject.transform.position.x < o_center.x)
+			{
+				x = 2;
+				pos.x -= this.deltaMove; // * Time.deltaTime;
+			}
+			if (this.gameObject.transform.position.y > o_center.y)
+			{
+				y = 1;
+				pos.y += this.deltaMove; // * Time.deltaTime;
+			}
+			else if (this.gameObject.transform.position.y < o_center.y)
+			{
+				y = 2;
+				pos.y -= this.deltaMove; // * Time.deltaTime;
+			}
+		}
+		if (previousAction[0][0] == x && previousAction[0][1] == y && previousAction[1][0] != x && previousAction[1][1] != y)
+		{
+			Destroy(this.gameObject);
+		}
+		else
+		{
+			this.gameObject.transform.position = pos;
+			previousAction = new int[][]{new int[]{previousAction[1][0],previousAction[1][1]},new int[]{x,y}};
+		}
+		
 	}
 	
 	public void PrintArray()
@@ -139,6 +207,6 @@ public class Block : MonoBehaviour
 	
 	public int blockArea()
 	{
-		return (int)(this.width * this.length);
+		return (int)this.area + 1;
 	}
 }

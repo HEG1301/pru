@@ -6,11 +6,12 @@ using Random = System.Random;
 
 public class BlockGeneration : MonoBehaviour
 {
-	public GameObject bloc;
+	public GameObject[] BlockList;
 	public GameObject BorderRight;
 	public GameObject BorderLeft;
 	public Random rdm;
 	public int conteur;
+	public int i;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,9 +33,9 @@ public class BlockGeneration : MonoBehaviour
 		if (Input.GetKeyUp(KeyCode.A))
 		{
 			Vector3[] extremity = BorderRight.GetComponent<Border>().getNewSectorExtremity();
-			GameObject tmp = Instantiate(bloc,extremity[0],Quaternion.identity);
+			GameObject tmp = Instantiate(BlockList[0],extremity[0],Quaternion.identity);
 			tmp.name = "Block_" + conteur;
-			tmp = Instantiate(bloc,extremity[1],Quaternion.identity);
+			tmp = Instantiate(BlockList[0],extremity[1],Quaternion.identity);
 			tmp.name = "Block_" + conteur;
 			conteur ++;
 		}
@@ -43,9 +44,9 @@ public class BlockGeneration : MonoBehaviour
 			Vector3[] extremityR = BorderRight.GetComponent<Border>().getNewSectorExtremity();
 			Vector3[] extremityL = BorderLeft.GetComponent<Border>().getNewSectorExtremity();
 			Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x,(int)extremityR[0].x),rdm.Next((int)extremityR[1].y,(int)extremityR[0].y),extremityL[0].z);
-			GameObject tmp = Instantiate(bloc,pos,Quaternion.identity);
+			GameObject tmp = Instantiate(BlockList[0],pos,Quaternion.identity);
 			tmp.name = "Block_" + conteur;
-			//tmp.GetComponent<Block>().checkAlone();
+			//tmp.GetComponent<BlockList[0]k>().checkAlone();
 			conteur ++;
 		}
 		if (Input.GetKeyUp(KeyCode.D))
@@ -53,7 +54,7 @@ public class BlockGeneration : MonoBehaviour
 			Vector3[] extremityR = BorderRight.GetComponent<Border>().getYExtremity();
 			Vector3[] extremityL = BorderLeft.GetComponent<Border>().getYExtremity();
 			Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x,(int)extremityR[0].x),rdm.Next((int)extremityR[1].y,(int)extremityR[0].y),extremityL[0].z);
-			GameObject tmp = Instantiate(bloc,pos,Quaternion.identity);
+			GameObject tmp = Instantiate(BlockList[0],pos,Quaternion.identity);
 			tmp.name = "Block_" + conteur;
 			conteur ++;
 		}
@@ -63,22 +64,34 @@ public class BlockGeneration : MonoBehaviour
 		}
     }
 	
-	public GameObject createRandomBloc(Vector3[] extremityR,Vector3[] extremityL)
+	public GameObject getRandomInList()
+	{
+		return BlockList[rdm.Next(0,BlockList.Length)];
+	}
+	
+	public int getRandomRotation(Block script)
+	{
+		return (script.nbrAngle != 0)?(rdm.Next(0,script.nbrAngle) * 360/script.nbrAngle):0;
+	}
+	public GameObject createRandomBlock(Vector3[] extremityR,Vector3[] extremityL)
 	{
 		Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x+(int)BorderLeft.transform.localScale.x-1,(int)extremityR[0].x-(int)BorderRight.transform.localScale.x)+1,rdm.Next((int)extremityR[1].y,(int)extremityR[0].y	),extremityL[0].z);
-		return Instantiate(bloc,pos,Quaternion.identity);
+		GameObject tmp = Instantiate(getRandomInList(),pos,Quaternion.identity);
+		tmp.transform.eulerAngles = new Vector3(0,0,getRandomRotation(tmp.GetComponent<Block>()));
+		tmp.GetComponent<Block>().scriptBlockGen = this;
+		return tmp;
 	}
 	public void generateNewSection()
 	{		
 		Border ScriptRight = BorderRight.GetComponent<Border>();
 		Border ScriptLeft = BorderLeft.GetComponent<Border>();
-		int i = 0;
+		this.i = 0;
 		int limit = (int)(ScriptRight.newSectionArea(this.BorderLeft.transform.position.x+this.BorderLeft.transform.localScale.x));
-		limit = (int)(limit * 0.3f);
+		limit = (int)(limit * 0.35f);
 		Debug.Log(limit);
 		while (i < limit)
 		{
-			GameObject tmp = createRandomBloc(ScriptRight.getNewSectorExtremity(),ScriptLeft.getNewSectorExtremity());
+			GameObject tmp = createRandomBlock(ScriptRight.getNewSectorExtremity(),ScriptLeft.getNewSectorExtremity());
 			tmp.name = "Block_" + conteur;
 			if (tmp.GetComponent<Block>().checkAlone())
 			{
