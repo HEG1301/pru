@@ -359,9 +359,11 @@
 "Assets/Scripts/BlockGeneration.cs"
 "Assets/Scripts/Border.cs"
 "Assets/Scripts/Button_Input.cs"
+"Assets/Scripts/Coins.cs"
 "Assets/Scripts/DataPlayer.cs"
 "Assets/Scripts/Equipment.cs"
 "Assets/Scripts/Menu.cs"
+"Assets/Scripts/PlayerInGame.cs"
 -langversion:9.0
 
 /deterministic

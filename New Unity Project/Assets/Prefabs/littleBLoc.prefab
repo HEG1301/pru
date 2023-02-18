@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 9095080812447526362}
   m_Layer: 0
   m_Name: littleBLoc
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   area: 5
   deltaMove: 0.2
+  conteur: 0
   scriptBlockGen: {fileID: 0}
   nbrAngle: 4
 --- !u!1 &9095080812592013186

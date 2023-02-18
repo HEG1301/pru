@@ -53,13 +53,13 @@ public class Block : MonoBehaviour
 	*/
 	void OnTriggerStay(Collider other)
 	{
-		if (other.gameObject.name != this.gameObject.name && other.gameObject.tag != "player")
+		if (other.gameObject.name != this.gameObject.name && other.gameObject.tag == "obstacle")
 		{
 			if (other.gameObject.GetInstanceID() > this.gameObject.GetInstanceID())
 			{
 				if (SceneManager.GetActiveScene().name != "TestingScene")
 				{
-					this.scriptBlockGen.conteur --;
+					this.scriptBlockGen.conteurBlock --;
 					this.scriptBlockGen.i -= this.blockArea();
 				}
 				//Debug.LogWarning(this.gameObject.name + "   " + other.gameObject.name);
