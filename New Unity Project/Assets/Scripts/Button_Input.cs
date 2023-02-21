@@ -18,6 +18,12 @@ public class Button_Input : MonoBehaviour
 		Application.Quit();
 	}
 	
+	public void AddGold(GameObject canvas)
+	{
+		DataPlayer player = canvas.GetComponent<Menu>().player;
+		player.gold += 100;
+	}
+	
 	public void saveLetter(GameObject Input)
 	{
 		oldLetter = Input.GetComponent<TMP_InputField>().text;

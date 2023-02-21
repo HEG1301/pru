@@ -28,7 +28,17 @@ public class Coins : MonoBehaviour
 		}
 		else if (other.gameObject.tag == "Player")
 		{
+			//other.gameObject.GetComponent<PlayerInGame>().money += this.value;
+			Destroy(this.gameObject);
+		}
+	}
+	
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.tag == "Player")
+		{
 			other.gameObject.GetComponent<PlayerInGame>().money += this.value;
+			Destroy(this.gameObject);
 		}
 	}
 	

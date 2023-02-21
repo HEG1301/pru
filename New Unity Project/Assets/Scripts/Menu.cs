@@ -8,7 +8,7 @@ using TMPro;
 public class Menu : MonoBehaviour
 {
 	[HideInInspector]
-	private DataPlayer player;
+	public DataPlayer player;
 
 	[HideInInspector]
 	private Equipment test;
