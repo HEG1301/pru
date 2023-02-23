@@ -49,7 +49,7 @@ public class DataPlayer //: MonoBehaviour
 		this.numberOfDivingDone = 0;
 		this.equipments = new List<Equipment>();
 		this.maxLife = 100;
-		this.maxApneeTime = 0.45f; //temps moyen d'une personne de 45 seconde
+		this.maxApneeTime = 45f; //temps moyen d'une personne de 45 seconde
 		this.strenght = 10;
 		this.level = 1;
 		this.curentExp = 0;
@@ -104,5 +104,19 @@ public class DataPlayer //: MonoBehaviour
 	{
 		string data = File.ReadAllText(path);
 		return JsonUtility.FromJson<DataPlayer>(data);
+	}
+	
+	public float bonusEquipement(string stat)
+	{
+		switch (stat)
+		{
+			case "strenght":
+			case "oxy":
+			case "speed":
+			case "life":
+			case "apne":
+			default:
+				return 0f;
+		}
 	}
 }

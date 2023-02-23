@@ -42,13 +42,23 @@ public class Menu : MonoBehaviour
 	public TMP_InputField divinginput;
 	public TMP_InputField risinginput;
 	public TMP_InputField speedinput;
-	public TMP_InputField attackinput;
 	#endregion
     // Start is called before the first frame update
     void Start()
     {
         GameObject temp = GameObject.Find("Balade");
-		player = DataPlayer.loadData(Application.persistentDataPath + "/" + temp.GetComponent<BetweenSceneInfo>()._name + "_data.json");
+		if (temp != null)
+		{
+			if (temp.GetComponent<BetweenSceneInfo>() != null)
+				player = DataPlayer.loadData(Application.persistentDataPath + "/" + temp.GetComponent<BetweenSceneInfo>()._name + "_data.json");
+			else if (temp.GetComponent<fromGame>() != null)
+				player = temp.GetComponent<goToGame>().player;
+		}
+		else
+		{
+			player = new DataPlayer();
+			player.name = "trashaccount";
+		}
 		//Debug.Log(player.Name);
 		//Debug.Log(Application.persistentDataPath);
 		Destroy(temp);

@@ -362,6 +362,8 @@
 "Assets/Scripts/Coins.cs"
 "Assets/Scripts/DataPlayer.cs"
 "Assets/Scripts/Equipment.cs"
+"Assets/Scripts/fromGame.cs"
+"Assets/Scripts/goToGame.cs"
 "Assets/Scripts/Menu.cs"
 "Assets/Scripts/PlayerInGame.cs"
 -langversion:9.0

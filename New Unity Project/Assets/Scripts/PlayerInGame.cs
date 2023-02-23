@@ -6,6 +6,9 @@ using TMPro;
 
 public class PlayerInGame : MonoBehaviour
 {
+	[HideInInspector]
+	public DataPlayer player;
+	
 	public TextMeshProUGUI textMoney;
 	public Slider sliderApnee;
 	public Slider sliderOxy;
@@ -19,14 +22,38 @@ public class PlayerInGame : MonoBehaviour
 	private float maxApnee;
 	private float curentApnee;
 	private bool Die;
+	
+	private KeyCode left;
+	private KeyCode right;
+	private KeyCode rise;
+	private KeyCode dive;	
+	private KeyCode run;
     // Start is called before the first frame update
     void Start()
     {		
-		this.OxyMax = 24f/12f*60f;    //= capacity tank / 12 L * 60 => capacity tank by default will be 24, 12 L = we consum 12 L of oxy per minute when diving, * 60 convert minute to second
+		GameObject temp = GameObject.Find("Balade");
+		if (temp == null)
+		{
+			this.OxyMax = 24f/12f*60f;    //= capacity tank / 12 L * 60 => capacity tank by default will be 24, 12 L = we consum 12 L of oxy per minute when diving, * 60 convert minute to second
+			this.maxApnee = 45f;           //default apnee time;
+			this.speed = 10f;
+			this.right = KeyCode.RightArrow;
+			this.left = KeyCode.LeftArrow;
+			this.dive = KeyCode.DownArrow;
+			this.rise = KeyCode.UpArrow;
+			this.run = KeyCode.LeftShift;
+		}
+		else
+		{
+			player = temp.GetComponent<goToGame>().player;
+			this.OxyMax = (24f+player.bonusEquipement("oxy"))/16f*60f;  
+			this.maxApnee = player.maxApneeTime;
+			this.speed = player.strenght/2f + player.bonusEquipement("speed");
+			getKey(temp.GetComponent<goToGame>().UIdata);
+		}
+		Destroy(temp);
 		this.OxyCurent = OxyMax;
-		this.maxApnee = 45f;           //default apnee time;
 		this.curentApnee = maxApnee;
-        this.speed = 10f;
 		this.money = 0f;
 		
 		this.sliderApnee.minValue = 0;
@@ -96,4 +123,14 @@ public class PlayerInGame : MonoBehaviour
 		//pos.Normalize();
 		this.transform.position = pos;
     }
+	
+	
+	public void getKey(int[] key)
+	{
+		this.right = (KeyCode) key[0];
+		this.left = (KeyCode) key[1];
+		this.dive = (KeyCode) key[2];
+		this.rise = (KeyCode) key[3];
+		this.run = (KeyCode) key[4];
+	}
 }
