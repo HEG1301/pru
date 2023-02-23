@@ -31,6 +31,7 @@ public class BlockGeneration : MonoBehaviour
     {
 		if (Input.GetKeyUp(KeyCode.Space))
 		{
+			Debug.Log("create section");
 			BorderRight.GetComponent<Border>().expand();
 			BorderLeft.GetComponent<Border>().expand();
 		}

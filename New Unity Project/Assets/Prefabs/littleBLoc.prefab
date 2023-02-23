@@ -179,6 +179,8 @@ GameObject:
   - component: {fileID: 9095080812447526364}
   - component: {fileID: 9095080812447526363}
   - component: {fileID: 9095080812447526362}
+  - component: {fileID: 6070686352596096939}
+  - component: {fileID: 5484848891633503240}
   m_Layer: 0
   m_Name: littleBLoc
   m_TagString: obstacle
@@ -265,6 +267,32 @@ MonoBehaviour:
   conteur: 0
   scriptBlockGen: {fileID: 0}
   nbrAngle: 4
+--- !u!65 &6070686352596096939
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095080812447526361}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1, z: 1}
+  m_Center: {x: -0.5, y: 0, z: 0}
+--- !u!65 &5484848891633503240
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095080812447526361}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1, z: 1}
+  m_Center: {x: 1, y: 1, z: 0}
 --- !u!1 &9095080812592013186
 GameObject:
   m_ObjectHideFlags: 0
