@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerInGame : MonoBehaviour
@@ -16,11 +17,11 @@ public class PlayerInGame : MonoBehaviour
 	public float speed;
 	
 	private float OxyMax;
-	private float OxyCurent;
+	public float OxyCurent;
 	private bool atSurface;
 	
 	private float maxApnee;
-	private float curentApnee;
+	public float curentApnee;
 	private bool Die;
 	
 	private KeyCode left;
@@ -31,7 +32,8 @@ public class PlayerInGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {		
-		GameObject temp = GameObject.Find("Balade");
+		GameObject temp = GameObject.Find("ScriptsCarrier");
+		Debug.Log(temp);
 		if (temp == null)
 		{
 			this.OxyMax = 24f/12f*60f;    //= capacity tank / 12 L * 60 => capacity tank by default will be 24, 12 L = we consum 12 L of oxy per minute when diving, * 60 convert minute to second
@@ -51,6 +53,7 @@ public class PlayerInGame : MonoBehaviour
 			this.speed = player.strenght/2f + player.bonusEquipement("speed");
 			getKey(temp.GetComponent<goToGame>().UIdata);
 		}
+		Debug.Log(speed);
 		Destroy(temp);
 		this.OxyCurent = OxyMax;
 		this.curentApnee = maxApnee;
@@ -65,6 +68,11 @@ public class PlayerInGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		
+		if (Input.GetKeyUp(KeyCode.Escape))
+		{
+			toGame();
+		}
 		this.sliderApnee.value = curentApnee;
 		this.sliderOxy.value = OxyCurent;
 		if (this.Die)
@@ -80,6 +88,7 @@ public class PlayerInGame : MonoBehaviour
 				{
 					Debug.Log("player has die");
 					this.Die = true;
+					toGame();
 				}
 			}
 			else
@@ -132,5 +141,18 @@ public class PlayerInGame : MonoBehaviour
 		this.dive = (KeyCode) key[2];
 		this.rise = (KeyCode) key[3];
 		this.run = (KeyCode) key[4];
+	}
+	
+	public void toGame()
+	{
+		GameObject tmp = GameObject.Find("Balade");
+		player.gold += money;
+		player.bestScore = (player.bestScore > money)?player.bestScore:money;
+		player.saveData();
+		Debug.Log(tmp);
+		Debug.Log(tmp.GetComponent<fromGame>());
+		tmp.GetComponent<fromGame>().player = this.player;
+		DontDestroyOnLoad(tmp);
+		SceneManager.LoadScene("Menu");
 	}
 }

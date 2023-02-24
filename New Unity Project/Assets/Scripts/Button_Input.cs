@@ -18,6 +18,12 @@ public class Button_Input : MonoBehaviour
 		Application.Quit();
 	}
 	
+	public void BackToStart(string s)
+	{
+		DataPlayer p = GameObject.Find("Canvas").GetComponent<Menu>().player;
+		p.saveData();
+		loadScene(s);
+	}
 	public void AddGold(GameObject canvas)
 	{
 		DataPlayer player = canvas.GetComponent<Menu>().player;

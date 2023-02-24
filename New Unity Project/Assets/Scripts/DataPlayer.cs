@@ -41,6 +41,7 @@ public class DataPlayer //: MonoBehaviour
 	{
 		this.name = "";
 		this.bestDepth = 0;
+		this.bestScore = 0;
 		this.numberOfMeterDive = 0;
 		this.numberOfDeathByAsphixy = 0;
 		this.numberOfDeathByObstacle = 0;

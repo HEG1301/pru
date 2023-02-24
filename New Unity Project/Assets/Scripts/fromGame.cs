@@ -24,7 +24,6 @@ public class fromGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -33,10 +32,12 @@ public class fromGame : MonoBehaviour
         
     }
 
+/*
 	public void quitGame(string s)
 	{
 		this.player = GameObject.Find("Player").GetComponent<PlayerInGame>().player;
 		DontDestroyOnLoad(this.gameObject);
 		SceneManager.LoadScene(s);
 	}
+*/
 }

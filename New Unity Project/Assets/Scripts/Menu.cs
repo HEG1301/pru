@@ -52,7 +52,7 @@ public class Menu : MonoBehaviour
 			if (temp.GetComponent<BetweenSceneInfo>() != null)
 				player = DataPlayer.loadData(Application.persistentDataPath + "/" + temp.GetComponent<BetweenSceneInfo>()._name + "_data.json");
 			else if (temp.GetComponent<fromGame>() != null)
-				player = temp.GetComponent<goToGame>().player;
+				player = temp.GetComponent<fromGame>().player;
 		}
 		else
 		{
