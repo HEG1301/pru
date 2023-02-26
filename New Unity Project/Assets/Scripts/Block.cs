@@ -57,11 +57,7 @@ public class Block : MonoBehaviour
 		{
 			if (other.gameObject.GetInstanceID() > this.gameObject.GetInstanceID())
 			{
-				if (SceneManager.GetActiveScene().name != "TestingScene")
-				{
-					this.scriptBlockGen.conteurBlock --;
-					this.scriptBlockGen.i -= this.blockArea();
-				}
+				
 				//Debug.LogWarning(this.gameObject.name + "   " + other.gameObject.name);
 				if (this.conteur >= 120)
 				{
@@ -82,13 +78,14 @@ public class Block : MonoBehaviour
 	
 	private void tryMove(Collider other)
 	{
+		rdm = new Random();
 		Vector3 o_center = other.bounds.center;
 		Vector3 pos = this.gameObject.transform.position;
 		//Debug.Log(o_center + " | " + pos);
-		int x = 0,y = 0;
+		int x = 0,y = 0,dir = 0;
 		if (pos == o_center)
 		{
-			int dir = rdm.Next(0,4);
+			dir = rdm.Next(0,4);
 			if ((float)dir/2f >= 1f)
 				pos.x += dir%2*(-1)*other.bounds.size.x; //*Time.deltaTime;
 			else

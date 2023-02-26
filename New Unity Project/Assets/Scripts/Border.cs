@@ -10,6 +10,7 @@ public class Border : MonoBehaviour
     void Start()
     {
 		this.originalYScale = this.gameObject.transform.localScale.y;
+		//Debug.Log(this.gameObject.transform.localScale);
 		this.nbrExpansion = 1;
     }
 
@@ -25,10 +26,11 @@ public class Border : MonoBehaviour
 		Vector3 pos = this.gameObject.transform.position;
 		pos.y -= originalYScale/2;
 		nbrExpansion += 1;
+		//Debug.Log(scale + "  -  " + nbrExpansion + "  -  " + originalYScale);
 		scale.y = originalYScale * nbrExpansion;
+		//Debug.Log(scale);
 		this.gameObject.transform.position = pos;
 		this.gameObject.transform.localScale = scale;
-		
 	}
 	
 	public Vector3[] getYExtremity()
