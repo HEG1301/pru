@@ -35,11 +35,12 @@ public class BlockGeneration : MonoBehaviour
 		this.nbrSection ++;
 		
 		//pas encore tester
-		this.nbrPieceSection = (int)(10*(1.0f+0.25f*nbrSection));
-		this.coefSection += this.coefSection * 0.05f * nbrSection;
+		//this.nbrPieceSection = (int)(10*(1.0f+0.25f*nbrSection));
+		//this.coefSection += this.coefSection * 0.05f * nbrSection;
 		//fin de pas test		
 		
 		this.i = 0;
+		// BorderRight.transform.localScale *= 2;
 		BorderRight.GetComponent<Border>().expand();
 		BorderLeft.GetComponent<Border>().expand();
 		

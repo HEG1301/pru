@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Border : MonoBehaviour
 {
-	float originalYScale;
-	int nbrExpansion;
+	float originalYScale = 30;
+	int nbrExpansion = 1;
     // Start is called before the first frame update
     void Start()
     {
 		this.originalYScale = this.gameObject.transform.localScale.y;
-		//Debug.Log(this.gameObject.transform.localScale);
+		Debug.Log(this.gameObject.transform.localScale  + "   |   " + originalYScale);
 		this.nbrExpansion = 1;
     }
 

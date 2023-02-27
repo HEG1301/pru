@@ -20,8 +20,14 @@ public class DataPlayer //: MonoBehaviour
 	public List<Equipment> equipments;
 
 	public float maxLife;
-	public float maxApneeTime;
+	public float dexterity;
 	public float strenght;
+
+	public float costLife;
+	public float costDexterity;
+	public float costStrenght;
+	
+	public float maxApneeTime;
 	
 	public int level;
 	public float curentExp;
@@ -40,6 +46,9 @@ public class DataPlayer //: MonoBehaviour
 	public DataPlayer()
 	{
 		this.name = "";
+		this.costLife = 25;
+		this.costStrenght = 50;
+		this.costDexterity = 75;
 		this.bestDepth = 0;
 		this.bestScore = 0;
 		this.numberOfMeterDive = 0;
@@ -50,6 +59,7 @@ public class DataPlayer //: MonoBehaviour
 		this.numberOfDivingDone = 0;
 		this.equipments = new List<Equipment>();
 		this.maxLife = 100;
+		this.dexterity = 25;
 		this.maxApneeTime = 45f; //temps moyen d'une personne de 45 seconde
 		this.strenght = 10;
 		this.level = 1;
@@ -105,6 +115,53 @@ public class DataPlayer //: MonoBehaviour
 	{
 		string data = File.ReadAllText(path);
 		return JsonUtility.FromJson<DataPlayer>(data);
+	}
+	
+	public bool upgradeSkill(int index)
+	{
+		switch (index)
+		{
+			case 1:
+				if (this.gold > this.costLife)
+				{
+					this.gold -= this.costLife;
+					this.costLife *= 2;
+					this.maxLife += 50;
+					return true;
+				}
+				return false;
+			case 2:
+				if (this.gold > this.costDexterity)
+				{
+					this.gold -= this.costDexterity;
+					this.costDexterity *= 2;
+					this.dexterity += 7.5f;
+					return true;
+				}
+				return false;
+			case 3:
+				if (this.gold > this.costDexterity)
+				{
+					this.gold -= this.costDexterity;
+					this.costDexterity *= 2;
+					this.dexterity += 5;
+					return true;
+				}
+				return false;
+			default:
+				return false;
+		}
+	}
+	
+	public bool upgradeEquipment(int index)
+	{
+		int tmp = equipments[index].upgrade(this.gold);
+		if (tmp != -1)
+		{
+			this.gold -= tmp;
+			return true;
+		}
+		return false;
 	}
 	
 	public float bonusEquipement(string stat)

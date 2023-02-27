@@ -36,6 +36,22 @@ public class Menu : MonoBehaviour
 	public TextMeshProUGUI numberOfDeathByObstacleText;
 	#endregion
 	
+	#region skill_and_equipement
+	public TextMeshProUGUI hpText;
+	public TextMeshProUGUI dexText;
+	public TextMeshProUGUI strText;
+	
+	public TextMeshProUGUI hpCostText;
+	public TextMeshProUGUI dexCostText;
+	public TextMeshProUGUI strCostText;
+	
+	/*
+	public Image hpRessourceImg;
+	public Image dexRessourceImg;
+	public Image strRessourceImg;
+	*/
+	#endregion
+	
 	#region parameter
 	public TMP_InputField rigthinput;
 	public TMP_InputField leftinput;
@@ -82,6 +98,17 @@ public class Menu : MonoBehaviour
 		this.numberOfDeathByObstacleText.text = this.player.numberOfDeathByObstacle + "";
 		this.numberOfDeathByPredatorText.text = this.player.numberOfDeathByPredator + "";
 		
+		
+		this.hpText.text = "HP : " + this.player.maxLife;
+		this.dexText.text = "Dex : " + this.player.dexterity;
+		this.strText.text = "Str : " + this.player.strenght;
+	
+		this.hpCostText.text = "" + this.player.costLife;
+		this.dexCostText.text = "" + this.player.costDexterity;
+		this.strCostText.text = ""  + this.player.costStrenght;
+	
+		
+		
 		//Debug.Log("test");
 		
 		if(Input.GetKeyUp(KeyCode.Escape))
@@ -110,6 +137,13 @@ public class Menu : MonoBehaviour
 		}
     }
 	
+	public bool upgrade(int index)
+	{
+		if (index <= 3)
+			return this.player.upgradeSkill(index);
+		else
+			return this.player.upgradeEquipment(index-4);
+	}
 	void OnDisable()
     {
         player.saveData();

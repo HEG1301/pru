@@ -61,7 +61,9 @@ public class Block : MonoBehaviour
 				//Debug.LogWarning(this.gameObject.name + "   " + other.gameObject.name);
 				if (this.conteur >= 120)
 				{
+					scriptBlockGen.i -= this.blockArea();
 					Debug.Log("destroy" + this.gameObject.name);
+					conteur = 0;
 					Destroy(this.gameObject);
 				}
 				tryMove(other);
