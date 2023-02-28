@@ -306,7 +306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1671703190464041506, guid: e3b7da2e5b2efa44facb7dd3a7b10dda, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.7
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 1671703190464041506, guid: e3b7da2e5b2efa44facb7dd3a7b10dda, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1382,6 +1382,10 @@ PrefabInstance:
       propertyPath: sliderOxy
       value: 
       objectReference: {fileID: 768476452}
+    - target: {fileID: 3356387162806641597, guid: 556f2761082e7b14f8b2a8df8b92e45d, type: 3}
+      propertyPath: sliderLife
+      value: 
+      objectReference: {fileID: 77189692}
     - target: {fileID: 3356387162806641597, guid: 556f2761082e7b14f8b2a8df8b92e45d, type: 3}
       propertyPath: sliderApnee
       value: 
