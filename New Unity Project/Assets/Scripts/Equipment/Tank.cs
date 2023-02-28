@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Tank : Equipment
 {
-	private float oxyCapacity;
-	private float malusStrenght;
-	private float malusDexterity;
+	public float oxyCapacity;
+	public float malusStrenght;
+	public float malusDexterity;
 	
 	public Tank()
 	{

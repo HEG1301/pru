@@ -102,7 +102,6 @@ public class Menu : MonoBehaviour
 		this.hpText.text = "HP : " + this.player.maxLife;
 		this.dexText.text = "Dex : " + this.player.dexterity;
 		this.strText.text = "Str : " + this.player.strenght;
-	
 		this.hpCostText.text = "" + this.player.costLife;
 		this.dexCostText.text = "" + this.player.costDexterity;
 		this.strCostText.text = ""  + this.player.costStrenght;
@@ -137,12 +136,12 @@ public class Menu : MonoBehaviour
 		}
     }
 	
-	public bool upgrade(int index)
+	public void upgrade(int index)
 	{
 		if (index <= 3)
-			return this.player.upgradeSkill(index);
+			Debug.Log(this.player.upgradeSkill(index));
 		else
-			return this.player.upgradeEquipment(index-4);
+			Debug.Log(this.player.upgradeEquipment(index-4));
 	}
 	void OnDisable()
     {

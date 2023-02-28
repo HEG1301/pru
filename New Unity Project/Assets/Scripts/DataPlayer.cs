@@ -17,7 +17,7 @@ public class DataPlayer //: MonoBehaviour
 	public float numberOfDeathByObstacle;
 	public float numberOfDivingDone;
 	
-	public List<Equipment> equipments;
+	public List<Equipment> equipments;   //[tank,suit,palm,weapon]
 
 	public float maxLife;
 	public float dexterity;
@@ -131,11 +131,11 @@ public class DataPlayer //: MonoBehaviour
 				}
 				return false;
 			case 2:
-				if (this.gold > this.costDexterity)
+				if (this.gold > this.costStrenght)
 				{
-					this.gold -= this.costDexterity;
-					this.costDexterity *= 2;
-					this.dexterity += 7.5f;
+					this.gold -= this.costStrenght;
+					this.costStrenght *= 2.5f;
+					this.strenght += 5f;
 					return true;
 				}
 				return false;
@@ -143,8 +143,8 @@ public class DataPlayer //: MonoBehaviour
 				if (this.gold > this.costDexterity)
 				{
 					this.gold -= this.costDexterity;
-					this.costDexterity *= 2;
-					this.dexterity += 5;
+					this.costDexterity *= 3;
+					this.dexterity += 2.5f;
 					return true;
 				}
 				return false;
@@ -164,15 +164,31 @@ public class DataPlayer //: MonoBehaviour
 		return false;
 	}
 	
-	public float bonusEquipement(string stat)
+	public float statAndBonusEquipement(string stat)
 	{
+		Tank tank = (Tank)this.equipments[0];
+		Suit suit = (Suit)this.equipments[1];
+		Palm palm = (Palm)this.equipments[2];
+		Weapon weapon = (Weapon)this.equipments[3];
+		
+		float tmpStrength = this.strenght*(((palm != null)?palm.bonusStrenght:1f) - ((tank != null)?tank.malusStrenght:0f));
+		float tmpDext = this.dexterity*(((suit != null)?suit.bonusDexterity:1f) - ((tank != null)?tank.malusDexterity:0f));
 		switch (stat)
 		{
-			case "strenght":
+			case "damage":
+				if (weapon != null)
+					return weapon.damage;
+				return 10;
 			case "oxy":
+				if (tank != null)
+					return tank.oxyCapacity * 60f / (float)(20-(int)(this.level / 5));
+				return 0f;
 			case "speed":
+				return (tmpStrength/4f + tmpDext/5f);
 			case "life":
+				return this.maxLife;
 			case "apne":
+				return Mathf.Clamp(tmpStrength + this.maxLife/3f,0,300);
 			default:
 				return 0f;
 		}

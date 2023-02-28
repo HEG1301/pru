@@ -13,14 +13,17 @@ public class PlayerInGame : MonoBehaviour
 	public TextMeshProUGUI textMoney;
 	public Slider sliderApnee;
 	public Slider sliderOxy;
+	public Slider sliderLife;
 	public float money;
 	public float speed;
-	
-	private float OxyMax;
+	public float damage;
+	public float lifeMax;
+	public float lifeCurent;
+	public float OxyMax;
 	public float OxyCurent;
 	private bool atSurface;
 	
-	private float maxApnee;
+	public float maxApnee;
 	public float curentApnee;
 	private bool Die;
 	
@@ -39,6 +42,7 @@ public class PlayerInGame : MonoBehaviour
 			this.OxyMax = 24f/12f*60f;    //= capacity tank / 12 L * 60 => capacity tank by default will be 24, 12 L = we consum 12 L of oxy per minute when diving, * 60 convert minute to second
 			this.maxApnee = 45f;           //default apnee time;
 			this.speed = 10f;
+			this.damage = 20f;
 			this.right = KeyCode.RightArrow;
 			this.left = KeyCode.LeftArrow;
 			this.dive = KeyCode.DownArrow;
@@ -48,19 +52,23 @@ public class PlayerInGame : MonoBehaviour
 		else
 		{
 			player = temp.GetComponent<goToGame>().player;
-			this.OxyMax = (24f+player.bonusEquipement("oxy"))/16f*60f;  
-			this.maxApnee = player.maxApneeTime;
-			this.speed = player.strenght/2f + player.bonusEquipement("speed");
+			this.OxyMax = this.player.statAndBonusEquipement("oxy");
+			this.maxApnee = this.player.statAndBonusEquipement("apne");
+			this.speed = this.player.statAndBonusEquipement("speed");
+			this.damage = this.player.statAndBonusEquipement("damage");
+			this.lifeMax = this.player.statAndBonusEquipement("life");
 			getKey(temp.GetComponent<goToGame>().UIdata);
 		}
-		Debug.Log(speed);
 		Destroy(temp);
 		this.OxyCurent = OxyMax;
+		this.lifeCurent = lifeMax;
 		this.curentApnee = maxApnee;
 		this.money = 0f;
 		
+		this.sliderLife.minValue = 0;
 		this.sliderApnee.minValue = 0;
 		this.sliderOxy.minValue = 0;
+		this.sliderLife.maxValue = lifeMax;
 		this.sliderApnee.maxValue = maxApnee;
 		this.sliderOxy.maxValue = OxyMax;
     }
@@ -73,6 +81,7 @@ public class PlayerInGame : MonoBehaviour
 		{
 			toGame();
 		}
+		this.sliderLife.value = lifeCurent;
 		this.sliderApnee.value = curentApnee;
 		this.sliderOxy.value = OxyCurent;
 		if (this.Die)

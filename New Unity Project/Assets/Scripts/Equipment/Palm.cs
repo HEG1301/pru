@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Palm : Equipment
 {
-	private float bonusStrenght;
+	public float bonusStrenght;
 	
 	public Palm()
 	{
