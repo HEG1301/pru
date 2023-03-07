@@ -370,6 +370,7 @@
 "Assets/Scripts/goToGame.cs"
 "Assets/Scripts/Menu.cs"
 "Assets/Scripts/PlayerInGame.cs"
+"Assets/Scripts/Shark.cs"
 -langversion:9.0
 
 /deterministic

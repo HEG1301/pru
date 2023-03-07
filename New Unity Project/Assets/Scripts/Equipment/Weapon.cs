@@ -19,6 +19,13 @@ public class Weapon : Equipment
 		//this.sprite = Resources.Load("linkOfSpriteForWeapon");
 	}
 	
+	public Weapon(int costUpgrade,float bonusStrenght,int bougthPrice)
+	{
+		this.costUpgrade = costUpgrade;
+		this.damage = bonusStrenght;
+		this.goldPrice = bougthPrice;
+		this.level = 1;
+	}
 	public override int upgrade(float gold)
 	{
 		if (gold >= this.costUpgrade)

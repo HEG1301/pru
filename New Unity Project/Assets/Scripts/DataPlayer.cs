@@ -61,7 +61,7 @@ public class DataPlayer //: MonoBehaviour
 		this.numberOfPredatorHunt = 0;
 		this.numberOfDivingDone = 0;
 		this.equipments = new Equipment[4];       //[tank,suit,palm,weapon]
-		this.weapons = new List<Weapon>(){new Weapon(10,30),new Weapon(20,50),new Weapon(40,50),new Weapon(100,100)};
+		this.weapons = new List<Weapon>(){new Weapon(10,50,30),new Weapon(20,50,75),new Weapon(40,75,100),new Weapon(100,75,200)};
 		this.palms = new List<Palm>();
 		this.tanks = new List<Tank>();
 		this.suits = new List<Suit>();
@@ -116,14 +116,14 @@ public class DataPlayer //: MonoBehaviour
 		}
 	}
 	
-	public void changeCarried(int newIndex,int indexType)
+	public bool changeCarried(int newIndex,int indexType)
 	{
 		switch(indexType)
 		{
 			case 1:
-				if (newIndex >= tanks.Count)
-					return;
-				foreach (Tank tk in tanks)
+				if (newIndex >= weapons.Count)
+					return false;
+				foreach (Weapon tk in weapons)
 				{
 					if (tk.isCarried)
 					{
@@ -131,13 +131,13 @@ public class DataPlayer //: MonoBehaviour
 						break;
 					}
 				}
-				tanks[newIndex].isCarried = true;
-				equipments[0] = tanks[newIndex];
-				return;
+				weapons[newIndex].isCarried = true;
+				equipments[3] = weapons[newIndex];
+				return true;
 			case 2:
-				if (newIndex >= suits.Count)
-					return;
-				foreach (Suit st in suits)
+				if (newIndex >= tanks.Count)
+					return false;
+				foreach (Tank st in tanks)
 				{
 					if (st.isCarried)
 					{
@@ -145,13 +145,13 @@ public class DataPlayer //: MonoBehaviour
 						break;
 					}
 				}
-				suits[newIndex].isCarried = true;
-				equipments[1] = suits[newIndex];
-				return;
+				tanks[newIndex].isCarried = true;
+				equipments[0] = tanks[newIndex];
+				return true;
 			case 3:
-				if (newIndex >= palms.Count)
-					return;
-				foreach (Palm pm in palms)
+				if (newIndex >= suits.Count)
+					return false;
+				foreach (Suit pm in suits)
 				{
 					if (pm.isCarried)
 					{
@@ -159,13 +159,13 @@ public class DataPlayer //: MonoBehaviour
 						break;
 					}
 				}
-				palms[newIndex].isCarried = true;
-				equipments[2] = palms[newIndex];
-				return;
+				suits[newIndex].isCarried = true;
+				equipments[1] = suits[newIndex];
+				return true;
 			case 4:
-				if (newIndex >= weapons.Count)
-					return;
-				foreach (Weapon wp in weapons)
+				if (newIndex >= palms.Count)
+					return false;
+				foreach (Palm wp in palms)
 				{
 					if (wp.isCarried)
 					{
@@ -173,11 +173,11 @@ public class DataPlayer //: MonoBehaviour
 						break;
 					}
 				}
-				weapons[newIndex].isCarried = true;
-				equipments[3] = weapons[newIndex];
-				return;
+				palms[newIndex].isCarried = true;
+				equipments[2] = palms[newIndex];
+				return true;
 			default:
-				break;
+				return false;
 		}
 	}
 	
@@ -188,16 +188,16 @@ public class DataPlayer //: MonoBehaviour
 			switch (index)
 			{
 				case 1:
-					this.tanks.Add((Tank)equipment);
+					//this.weapons[Array.IndexOf(this.weapons,(Weapon)equipment)].isBougth = true;
 					break;
 				case 2:
-					this.suits.Add((Suit)equipment);
+					this.tanks.Add((Tank)equipment);
 					break;
 				case 3:
-					this.palms.Add((Palm)equipment);
+					this.suits.Add((Suit)equipment);
 					break;
 				case 4:
-					this.weapons.Add((Weapon)equipment);
+					this.palms.Add((Palm)equipment);
 					break;
 				default:
 					Debug.Log("wrong index");
