@@ -10,6 +10,7 @@ public class Suit : Equipment
 	{
 		this.costUpgrade = 50;
 		this.bonusDexterity = 1.25f;
+		//this.sprite = Resources.Load("linkOfSpriteForSuit");
 	}
 	public Suit(int costUpgrade,float bonusStrenght)
 	{

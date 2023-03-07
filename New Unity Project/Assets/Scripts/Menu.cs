@@ -7,6 +7,7 @@ using TMPro;
 
 public class Menu : MonoBehaviour
 {
+	
 	[HideInInspector]
 	public DataPlayer player;
 
@@ -45,6 +46,8 @@ public class Menu : MonoBehaviour
 	public TextMeshProUGUI dexCostText;
 	public TextMeshProUGUI strCostText;
 	
+	
+	public GameObject PanelWeapon;
 	/*
 	public Image hpRessourceImg;
 	public Image dexRessourceImg;
@@ -82,11 +85,40 @@ public class Menu : MonoBehaviour
 		//Debug.Log(Application.persistentDataPath);
 		Destroy(temp);
 		test = new Equipment();
+		for (int i = 1;i<5;i++)
+		{
+			Transform tmp = PanelWeapon.transform.Find("Object " + i);
+			Button[] tmpB = tmp.gameObject.GetComponentsInChildren<Button>();
+			//Debug.Log(tmpB.Length + "|" + i);
+			if (player.weapons[i-1].isBougth)
+			{
+				tmpB[0].gameObject.SetActive(false);
+				if (player.weapons[i-1].isCarried)
+				{
+					tmpB[1].gameObject.SetActive(false);
+				}
+			}
+			else
+			{
+				tmpB[0].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Bougth for: " + player.weapons[i-1].goldPrice;
+				tmpB[1].gameObject.SetActive(false);
+			}
+			tmp.Find("description").GetComponent<TextMeshProUGUI>().text = player.weapons[i-1].getDescription();
+		}
     }
 
     // Update is called once per frame
     void Update()
     {
+		for (int i = 1;i<5;i++)
+		{
+			Transform tmp = PanelWeapon.transform.Find("Object " + i);
+			Button[] tmpB = tmp.gameObject.GetComponentsInChildren<Button>();
+			//Debug.Log(tmpB.Length + "|" + i);
+			tmpB[0].gameObject.SetActive(!player.weapons[i-1].isCarried);
+			tmp.Find("description").GetComponent<TextMeshProUGUI>().text = player.weapons[i-1].getDescription();
+		}
+		
         this.namePlayer.text = this.player.Name;
 		this.textGem.text = this.player.gem + "";
 		this.textGold.text = this.player.gold + "";
@@ -138,6 +170,27 @@ public class Menu : MonoBehaviour
 			tmp3.SetActive(true);
 		}
     }
+	
+	public void Bougth(int index)
+	{
+		switch (index/10)
+		{
+			case 1:
+				player.bought(player.weapons[index%10],1);
+				break;
+			case 2:
+				player.bought(player.weapons[index%10],2);
+				break;
+			case 3:
+				player.bought(player.weapons[index%10],3);
+				break;
+			case 4:
+				player.bought(player.weapons[index%10],4);
+				break;
+			default:
+				break;
+		}
+	}
 	
 	public void upgrade(int index)
 	{

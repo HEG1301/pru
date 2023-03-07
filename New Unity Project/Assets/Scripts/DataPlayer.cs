@@ -61,7 +61,7 @@ public class DataPlayer //: MonoBehaviour
 		this.numberOfPredatorHunt = 0;
 		this.numberOfDivingDone = 0;
 		this.equipments = new Equipment[4];       //[tank,suit,palm,weapon]
-		this.weapons = new List<Weapon>();
+		this.weapons = new List<Weapon>(){new Weapon(10,30),new Weapon(20,50),new Weapon(40,50),new Weapon(100,100)};
 		this.palms = new List<Palm>();
 		this.tanks = new List<Tank>();
 		this.suits = new List<Suit>();
@@ -205,6 +205,7 @@ public class DataPlayer //: MonoBehaviour
 			}
 			this.gold -= equipment.goldPrice;
 			this.gem -= equipment.gemPrice;
+			equipment.isBougth = true;
 			return true;
 		}
 		else if (equipment.goldPrice <= this.gold)

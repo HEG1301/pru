@@ -6,22 +6,25 @@ using UnityEngine;
 [System.Serializable]
 public class Equipment
 {
-	
+	public Sprite sprite;
 	public float goldPrice;
 	public float gemPrice;
 	public int level;
 	public int costUpgrade;
     public bool costGold;
 	public bool isCarried;
+	public bool isBougth;
 	
 	public Equipment()
 	{
+		this.sprite = null;
 		this.goldPrice = 0;
 		this.gemPrice = 0;
 		this.level = 1;
 		this.costUpgrade = 50;
 		this.costGold = true;
 		this.isCarried = false;
+		this.isBougth = false;
 	}
 	
 	private void updateCostUpgrade()

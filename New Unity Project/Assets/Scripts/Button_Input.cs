@@ -24,6 +24,7 @@ public class Button_Input : MonoBehaviour
 		p.saveData();
 		loadScene(s);
 	}
+	
 	public void AddGold(GameObject canvas)
 	{
 		DataPlayer player = canvas.GetComponent<Menu>().player;

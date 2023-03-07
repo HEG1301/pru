@@ -14,6 +14,7 @@ public class Tank : Equipment
 		this.costUpgrade = 250;
 		this.malusDexterity = 0.5f;
 		this.malusStrenght = 0.75f;
+		//this.sprite = Resources.Load("linkOfSpriteForTank");
 	}
 	public Tank(float oxyCapacity,int costUpgrade,float malusDexterity,float malusStrenght)
 	{

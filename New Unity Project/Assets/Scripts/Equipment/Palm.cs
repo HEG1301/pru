@@ -10,6 +10,7 @@ public class Palm : Equipment
 	{
 		this.costUpgrade = 50;
 		this.bonusStrenght = 1.5f;
+		//this.sprite = Resources.Load("linkOfSpriteForPalm");
 	}
 	public Palm(int costUpgrade,float bonusStrenght)
 	{

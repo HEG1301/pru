@@ -13,9 +13,10 @@ public class Weapon : Equipment
 	}
 	public Weapon(int costUpgrade,float bonusStrenght)
 	{
-		this.costUpgrade = (costUpgrade<50)?50:costUpgrade;
-		this.damage = (damage < 20)?20:damage;
-		this.level = 1; 
+		this.costUpgrade = costUpgrade;
+		this.damage = bonusStrenght;
+		this.level = 1;
+		//this.sprite = Resources.Load("linkOfSpriteForWeapon");
 	}
 	
 	public override int upgrade(float gold)
@@ -31,5 +32,10 @@ public class Weapon : Equipment
 	public override string ParseToString()
 	{
 		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried + "," + this.damage;
+	}
+	
+	public string getDescription()
+	{
+		return "this weapon is adding damage up to: " + this.damage;
 	}
 }
