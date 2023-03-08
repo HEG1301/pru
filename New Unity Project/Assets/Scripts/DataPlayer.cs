@@ -61,10 +61,10 @@ public class DataPlayer //: MonoBehaviour
 		this.numberOfPredatorHunt = 0;
 		this.numberOfDivingDone = 0;
 		this.equipments = new Equipment[4];       //[tank,suit,palm,weapon]
-		this.weapons = new List<Weapon>(){new Weapon(10,50,30),new Weapon(20,50,75),new Weapon(40,75,100),new Weapon(100,75,200)};
-		this.palms = new List<Palm>();
-		this.tanks = new List<Tank>();
-		this.suits = new List<Suit>();
+		this.weapons = new List<Weapon>(){new Weapon(50,10,30),new Weapon(50,20,150),new Weapon(75,40,250),new Weapon(75,100,1000)};
+		this.palms = new List<Palm>(){new Palm(50,1.25f,100),new Palm(40,1.3f,200),new Palm(80,1.5f,500),new Palm(50,1.5f,750)};
+		this.tanks = new List<Tank>(){new Tank(12,50,0.5f,0.75f,50),new Tank(24,75,0.6f,0.8f,750),new Tank(24,100,0.4f,0.5f,1100),new Tank(48,250,0.4f,0.5f,1750)};
+		this.suits = new List<Suit>(){new Suit(50,1.25f,100),new Suit(75,1.3f,200),new Suit(50,1.3f,400),new Suit(100,1.5f,750)};
 		this.maxLife = 100;
 		this.dexterity = 25;
 		this.maxApneeTime = 45f; //temps moyen d'une personne de 45 seconde
@@ -191,13 +191,13 @@ public class DataPlayer //: MonoBehaviour
 					//this.weapons[Array.IndexOf(this.weapons,(Weapon)equipment)].isBougth = true;
 					break;
 				case 2:
-					this.tanks.Add((Tank)equipment);
+					//this.tanks.Add((Tank)equipment);
 					break;
 				case 3:
-					this.suits.Add((Suit)equipment);
+					//this.suits.Add((Suit)equipment);
 					break;
 				case 4:
-					this.palms.Add((Palm)equipment);
+					//this.palms.Add((Palm)equipment);
 					break;
 				default:
 					Debug.Log("wrong index");

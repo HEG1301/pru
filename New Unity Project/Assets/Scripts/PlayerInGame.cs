@@ -161,7 +161,7 @@ public class PlayerInGame : MonoBehaviour
 		{
 			dir.x = -1;
 		}
-		this.gameObject.GetComponent<RigidBody>().AddForce(dir*speed*(1+isRunning)*Time.deltaTime),ForceMode.Force;
+		this.gameObject.GetComponent<Rigidbody>().AddForce(dir*speed*(1+((isRunning)?0.5f:0))*Time.deltaTime,ForceMode.Force);
     }
 	
 	

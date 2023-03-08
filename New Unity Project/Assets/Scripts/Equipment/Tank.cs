@@ -18,11 +18,20 @@ public class Tank : Equipment
 	}
 	public Tank(float oxyCapacity,int costUpgrade,float malusDexterity,float malusStrenght)
 	{
-		this.oxyCapacity = (oxyCapacity<24)?24:oxyCapacity;
-		this.costUpgrade = (costUpgrade<250)?250:costUpgrade;
-		this.malusDexterity = (malusDexterity > 1)?0.5f:malusDexterity;
-		this.malusStrenght = (malusStrenght > 1)?0.75f:malusStrenght;
+		this.oxyCapacity = oxyCapacity;
+		this.costUpgrade = costUpgrade;
+		this.malusDexterity = malusDexterity;
+		this.malusStrenght = malusStrenght;
 		this.level = 1;
+	}
+	public Tank(float oxyCapacity,int costUpgrade,float malusDexterity,float malusStrenght,int boughtPrice)
+	{
+		this.oxyCapacity = oxyCapacity;
+		this.costUpgrade = costUpgrade;
+		this.malusDexterity = malusDexterity;
+		this.malusStrenght = malusStrenght;
+		this.level = 1;
+		this.goldPrice = boughtPrice;
 	}
 	
 	public override int upgrade(float gold)
@@ -40,5 +49,10 @@ public class Tank : Equipment
 	public override string ParseToString()
 	{
 		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried + "," + this.oxyCapacity + "," + this.malusStrenght + "," + this.malusDexterity;
+	}
+	
+	public string getDescription()
+	{
+		return "this tank is adding oxygen up to: " + this.oxyCapacity + "but its also adding a malus in dexterity and strength  (" + this.malusDexterity + "," + this.malusStrenght + ")";
 	}
 }

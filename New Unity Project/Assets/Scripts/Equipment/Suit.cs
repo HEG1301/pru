@@ -12,11 +12,19 @@ public class Suit : Equipment
 		this.bonusDexterity = 1.25f;
 		//this.sprite = Resources.Load("linkOfSpriteForSuit");
 	}
-	public Suit(int costUpgrade,float bonusStrenght)
+	public Suit(int costUpgrade,float bonusDexterity)
 	{
-		this.costUpgrade = (costUpgrade<50)?50:costUpgrade;
-		this.bonusDexterity = (bonusDexterity < 1)?1.25f:bonusDexterity;
+		this.costUpgrade = costUpgrade;
+		this.bonusDexterity = bonusDexterity;
 		this.level = 1; 
+	}
+	
+	public Suit(int costUpgrade,float bonusDexterity,int boughtPrice)
+	{
+		this.costUpgrade = costUpgrade;
+		this.bonusDexterity = bonusDexterity;
+		this.level = 1; 
+		this.goldPrice = boughtPrice;
 	}
 	
 	public override int upgrade(float gold)
@@ -32,5 +40,10 @@ public class Suit : Equipment
 	public override string ParseToString()
 	{
 		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried + "," + this.bonusDexterity;
+	}
+	
+	public string getDescription()
+	{
+		return "this weapon is adding a bonus in dexterity up to: " + this.bonusDexterity;
 	}
 }

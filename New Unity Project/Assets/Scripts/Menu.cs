@@ -48,6 +48,9 @@ public class Menu : MonoBehaviour
 	
 	
 	public GameObject PanelWeapon;
+	public GameObject PanelTank;
+	public GameObject PanelSuit;
+	public GameObject PanelPalm;
 	public Image imageWeapon;
 	public Image imageTank;
 	public Image imagePalm;
@@ -110,6 +113,67 @@ public class Menu : MonoBehaviour
 			}
 			tmp.Find("description").GetComponent<TextMeshProUGUI>().text = player.weapons[i-1].getDescription();
 		}
+		for (int i = 1;i<5;i++)
+		{
+			Transform tmp = PanelTank.transform.Find("Object " + i);
+			Button[] tmpB = tmp.gameObject.GetComponentsInChildren<Button>();
+			//Debug.Log(tmpB.Length + "|" + i);
+			if (player.tanks[i-1].isBougth)
+			{
+				tmpB[0].gameObject.SetActive(false);
+				if (player.tanks[i-1].isCarried)
+				{
+					tmpI[i-1].sprite = tmp.Find("Image").gameObject.GetComponent<Image>().sprite;
+				}
+			}
+			else
+			{
+				tmpB[0].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Bougth for: " + player.tanks[i-1].goldPrice;
+				tmpB[1].gameObject.SetActive(false);
+			}
+			tmp.Find("description").GetComponent<TextMeshProUGUI>().text = player.weapons[i-1].getDescription();
+		}
+		for (int i = 1;i<5;i++)
+		{
+			Transform tmp = PanelSuit.transform.Find("Object " + i);
+			Button[] tmpB = tmp.gameObject.GetComponentsInChildren<Button>();
+			//Debug.Log(tmpB.Length + "|" + i);
+			if (player.suits[i-1].isBougth)
+			{
+				tmpB[0].gameObject.SetActive(false);
+				if (player.suits[i-1].isCarried)
+				{
+					tmpI[i-1].sprite = tmp.Find("Image").gameObject.GetComponent<Image>().sprite;
+				}
+			}
+			else
+			{
+				tmpB[0].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Bougth for: " + player.suits[i-1].goldPrice;
+				tmpB[1].gameObject.SetActive(false);
+			}
+			tmp.Find("description").GetComponent<TextMeshProUGUI>().text = player.weapons[i-1].getDescription();
+		}
+		for (int i = 1;i<5;i++)
+		{
+			Transform tmp = PanelPalm.transform.Find("Object " + i);
+			Button[] tmpB = tmp.gameObject.GetComponentsInChildren<Button>();
+			//Debug.Log(tmpB.Length + "|" + i);
+			if (player.palms[i-1].isBougth)
+			{
+				tmpB[0].gameObject.SetActive(false);
+				if (player.palms[i-1].isCarried)
+				{
+					tmpI[i-1].sprite = tmp.Find("Image").gameObject.GetComponent<Image>().sprite;
+				}
+			}
+			else
+			{
+				tmpB[0].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Bougth for: " + player.palms[i-1].goldPrice;
+				tmpB[1].gameObject.SetActive(false);
+			}
+			tmp.Find("description").GetComponent<TextMeshProUGUI>().text = player.palms[i-1].getDescription();
+		}
+		
     }
 
     // Update is called once per frame
@@ -184,13 +248,13 @@ public class Menu : MonoBehaviour
 				player.bought(player.weapons[index%10-1],1);
 				break;
 			case 2:
-				player.bought(player.weapons[index%10-1],2);
+				player.bought(player.palms[index%10-1],2);
 				break;
 			case 3:
-				player.bought(player.weapons[index%10-1],3);
+				player.bought(player.suits[index%10-1],3);
 				break;
 			case 4:				
-				player.bought(player.weapons[index%10-1],4);
+				player.bought(player.palms[index%10-1],4);
 				break;
 			default:
 				Debug.LogWarning("wrong index");

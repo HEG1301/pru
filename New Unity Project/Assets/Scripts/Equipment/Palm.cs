@@ -14,9 +14,17 @@ public class Palm : Equipment
 	}
 	public Palm(int costUpgrade,float bonusStrenght)
 	{
-		this.costUpgrade = (costUpgrade<50)?50:costUpgrade;
-		this.bonusStrenght = (bonusStrenght < 1)?1.5f:bonusStrenght;
+		this.costUpgrade = costUpgrade;
+		this.bonusStrenght = bonusStrenght;
 		this.level = 1; 
+	}
+	
+	public Palm(int costUpgrade,float bonusStrenght,int bougthPrice)
+	{
+		this.costUpgrade = costUpgrade;
+		this.bonusStrenght = bonusStrenght;
+		this.level = 1;
+		this.goldPrice = bougthPrice;
 	}
 	
 	public override int upgrade(float gold)
@@ -32,5 +40,10 @@ public class Palm : Equipment
 	public override string ParseToString()
 	{
 		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried + "," + this.bonusStrenght;
+	}
+	
+	public string getDescription()
+	{
+		return "this weapon is adding a bonus in strenght up to: " + this.bonusStrenght;
 	}
 }

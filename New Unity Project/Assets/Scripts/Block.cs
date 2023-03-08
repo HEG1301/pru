@@ -43,10 +43,6 @@ public class Block : MonoBehaviour
 		//Debug.Log("isAlone :" + checkAlone());
 	}
 
-    void Update()
-    {
-        
-    }
 	/*
 	void OnTriggerEnter(Collider other)
 	{

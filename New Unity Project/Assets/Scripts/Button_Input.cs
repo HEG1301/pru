@@ -28,7 +28,7 @@ public class Button_Input : MonoBehaviour
 	public void AddGold(GameObject canvas)
 	{
 		DataPlayer player = canvas.GetComponent<Menu>().player;
-		player.gold += 100;
+		player.gold += 10000;
 	}
 	
 	public void saveLetter(GameObject Input)
