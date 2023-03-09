@@ -41,7 +41,7 @@ public class PlayerInGame : MonoBehaviour
 		{
 			this.OxyMax = 24f/12f*60f;    //= capacity tank / 12 L * 60 => capacity tank by default will be 24, 12 L = we consum 12 L of oxy per minute when diving, * 60 convert minute to second
 			this.maxApnee = 45f;           //default apnee time;
-			this.speed = 10f;
+			this.speed = 10f/3;
 			this.damage = 20f;
 			this.right = KeyCode.RightArrow;
 			this.left = KeyCode.LeftArrow;
@@ -54,7 +54,7 @@ public class PlayerInGame : MonoBehaviour
 			player = temp.GetComponent<goToGame>().player;
 			this.OxyMax = this.player.statAndBonusEquipement("oxy");
 			this.maxApnee = this.player.statAndBonusEquipement("apne");
-			this.speed = this.player.statAndBonusEquipement("speed");
+			this.speed = this.player.statAndBonusEquipement("speed")/3;
 			this.damage = this.player.statAndBonusEquipement("damage");
 			this.lifeMax = this.player.statAndBonusEquipement("life");
 			getKey(temp.GetComponent<goToGame>().UIdata);
@@ -144,24 +144,32 @@ public class PlayerInGame : MonoBehaviour
 		this.transform.position = pos;
 		*/
 		bool isRunning = false;
+		if (Input.GetKey(KeyCode.LeftShift))
+			isRunning = true;
 		Vector3 dir = new Vector3(0,0,0);
-		 if (Input.GetKey(KeyCode.DownArrow))
+		this.gameObject.GetComponent<Rigidbody>().velocity = dir;
+		if (Input.GetKey(KeyCode.DownArrow))
 		{
-			dir.y = 1;
+			Debug.Log("Down");
+			dir.z = -1;
 		}
 		else if (Input.GetKey(KeyCode.UpArrow))
 		{
-			dir.y = -1;
+			Debug.Log("Up");
+			dir.z = 1;
 		}
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
+			Debug.Log("right");
 			dir.x = 1;
 		}
 		else if (Input.GetKey(KeyCode.LeftArrow))
 		{
+			Debug.Log("left");
 			dir.x = -1;
 		}
-		this.gameObject.GetComponent<Rigidbody>().AddForce(dir*speed*(1+((isRunning)?0.5f:0))*Time.deltaTime,ForceMode.Force);
+		//Debug.Log(dir);
+		this.gameObject.GetComponent<Rigidbody>().AddForce(dir*speed*(1+((isRunning)?0.5f:0)),ForceMode.Impulse);
     }
 	
 	

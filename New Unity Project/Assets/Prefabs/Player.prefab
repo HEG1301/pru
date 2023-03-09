@@ -92,7 +92,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3356387160840889859}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74303d0ef8d8e2346bbe03d41f5c13c2, type: 3}
   m_Name: 
@@ -107,6 +107,8 @@ MonoBehaviour:
   i: 0
   coefSection: 0
   nbrPieceSection: 0
+  nbrSection: 0
+  posStartNewSection: 0
 --- !u!1 &3356387160854646219
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,8 +538,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMoney: {fileID: 3356387162434245308}
+  sliderApnee: {fileID: 0}
+  sliderOxy: {fileID: 0}
+  sliderLife: {fileID: 0}
   money: 0
   speed: 0
+  damage: 0
+  lifeMax: 0
+  lifeCurent: 0
+  OxyMax: 0
+  OxyCurent: 0
+  maxApnee: 0
+  curentApnee: 0
 --- !u!54 &3356387162806641598
 Rigidbody:
   m_ObjectHideFlags: 0

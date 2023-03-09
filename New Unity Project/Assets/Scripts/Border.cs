@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Border : MonoBehaviour
 {
-	float originalYScale = 30;
+	float originalZScale = 30;
 	int nbrExpansion = 1;
     // Start is called before the first frame update
     void Start()
     {
-		this.originalYScale = this.gameObject.transform.localScale.y;
-		Debug.Log(this.gameObject.transform.localScale  + "   |   " + originalYScale);
+		this.originalZScale = this.gameObject.transform.localScale.z;
+		//Debug.Log(this.gameObject.transform.localScale  + "   |   " + originalZScale);
 		this.nbrExpansion = 1;
     }
 
@@ -24,28 +24,28 @@ public class Border : MonoBehaviour
 	{
 		Vector3 scale = this.gameObject.transform.localScale;
 		Vector3 pos = this.gameObject.transform.position;
-		pos.y -= originalYScale/2;
+		pos.z -= originalZScale/2;
 		nbrExpansion += 1;
 		//Debug.Log(scale + "  -  " + nbrExpansion + "  -  " + originalYScale);
-		scale.y = originalYScale * nbrExpansion;
+		scale.z= originalZScale * nbrExpansion;
 		//Debug.Log(scale);
 		this.gameObject.transform.position = pos;
 		this.gameObject.transform.localScale = scale;
 	}
 	
-	public Vector3[] getYExtremity()
+	public Vector3[] getZExtremity()
 	{
 		Vector3	pos = this.gameObject.transform.position;
-		Vector3 top = new Vector3(pos.x,pos.y + (this.gameObject.transform.localScale.y)/2,pos.z);
-		Vector3 bottom = new Vector3(pos.x,pos.y - (this.gameObject.transform.localScale.y)/2,pos.z);
+		Vector3 top = new Vector3(pos.x,pos.y,pos.z + (this.gameObject.transform.localScale.z)/2);
+		Vector3 bottom = new Vector3(pos.x,pos.y,pos.z - (this.gameObject.transform.localScale.z)/2);
 		return new Vector3[]{top,bottom};
 	}
 	
 	public Vector3[] getNewSectorExtremity()
 	{
 		Vector3	pos = this.gameObject.transform.position;
-		Vector3 bottom = new Vector3(pos.x,pos.y - (this.gameObject.transform.localScale.y)/2,pos.z);
-		Vector3 top = new Vector3(pos.x,bottom.y+originalYScale,pos.z);
+		Vector3 bottom = new Vector3(pos.x,pos.y,pos.z - (this.gameObject.transform.localScale.z)/2);
+		Vector3 top = new Vector3(pos.x,pos.y,bottom.z+originalZScale);
 		return new Vector3[]{top,bottom};
 	}
 	
@@ -53,7 +53,7 @@ public class Border : MonoBehaviour
 	{
 		float endX = this.gameObject.transform.position.x-this.gameObject.transform.localScale.x;
 		float width = Mathf.Abs(endX - startX);
-		return width * this.originalYScale;
+		return width * this.originalZScale;
 	}
 	
 }

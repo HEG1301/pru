@@ -52,7 +52,7 @@ public class BlockGeneration : MonoBehaviour
 		int limit = (int)(ScriptRight.newSectionArea(this.BorderLeft.transform.position.x+this.BorderLeft.transform.localScale.x) * 0.2f*coefSection);
 		
 		
-		this.posStartNewSection = extremityL[0].y;
+		this.posStartNewSection = extremityL[0].z;
 		//Debug.Log(posStartNewSection);
 		while (i < limit)
 		{
@@ -66,7 +66,7 @@ public class BlockGeneration : MonoBehaviour
 		{
 			GameObject tmp = Instantiate(coins,createRandomCoord(extremityR,extremityL),Quaternion.identity);
 			tmp.GetComponent<Coins>().scriptBlockGen = this;
-			tmp.transform.eulerAngles = new Vector3(90,0,0);
+			//tmp.transform.eulerAngles = new Vector3(0,0,0);
 			i ++;
 		}
 		Debug.Log("i = " + i);
@@ -77,12 +77,12 @@ public class BlockGeneration : MonoBehaviour
     {
 		//Debug.Log(this.gameObject.transform.position);
 		
-		if (this.gameObject.transform.position.y <= this.posStartNewSection)
+		if (this.gameObject.transform.position.z <= this.posStartNewSection)
 		{
 			generateNewSection();
 			return;
 		}
-		
+	
 		if (Input.GetKeyUp(KeyCode.Space))
 		{
 			Debug.Log("create section");
@@ -105,7 +105,7 @@ public class BlockGeneration : MonoBehaviour
 		{
 			Vector3[] extremityR = BorderRight.GetComponent<Border>().getNewSectorExtremity();
 			Vector3[] extremityL = BorderLeft.GetComponent<Border>().getNewSectorExtremity();
-			Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x,(int)extremityR[0].x),rdm.Next((int)extremityR[1].y,(int)extremityR[0].y),extremityL[0].z);
+			Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x,(int)extremityR[0].x),extremityL[0].y,rdm.Next((int)extremityR[1].z,(int)extremityR[0].z));
 			GameObject tmp = Instantiate(BlockList[0],pos,Quaternion.identity);
 			tmp.name = "Block_" + conteurBlock;
 			tmp.GetComponent<Block>().scriptBlockGen = this;
@@ -114,9 +114,9 @@ public class BlockGeneration : MonoBehaviour
 		}
 		if (Input.GetKeyUp(KeyCode.D))
 		{
-			Vector3[] extremityR = BorderRight.GetComponent<Border>().getYExtremity();
-			Vector3[] extremityL = BorderLeft.GetComponent<Border>().getYExtremity();
-			Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x,(int)extremityR[0].x),rdm.Next((int)extremityR[1].y,(int)extremityR[0].y),extremityL[0].z);
+			Vector3[] extremityR = BorderRight.GetComponent<Border>().getZExtremity();
+			Vector3[] extremityL = BorderLeft.GetComponent<Border>().getZExtremity();
+			Vector3 pos = new Vector3(rdm.Next((int)extremityL[0].x,(int)extremityR[0].x),extremityL[0].y,rdm.Next((int)extremityR[1].z,(int)extremityR[0].z));
 			GameObject tmp = Instantiate(BlockList[0],pos,Quaternion.identity);
 			tmp.name = "Block_" + conteurBlock;
 			tmp.GetComponent<Block>().scriptBlockGen = this;
@@ -126,6 +126,7 @@ public class BlockGeneration : MonoBehaviour
 		{
 			generateInNewSection();
 		}
+		
     }
 	
 	public GameObject getRandomInList()
@@ -140,14 +141,16 @@ public class BlockGeneration : MonoBehaviour
 	
 	public Vector3 createRandomCoord(Vector3[] extremityR,Vector3[] extremityL)
 	{
-		return new Vector3(rdm.Next((int)extremityL[0].x+(int)BorderLeft.transform.localScale.x-1,(int)extremityR[0].x-(int)BorderRight.transform.localScale.x)+1,rdm.Next((int)extremityR[1].y,(int)extremityR[0].y	),extremityL[0].z);
+		return new Vector3(rdm.Next((int)extremityL[0].x+(int)BorderLeft.transform.localScale.x-1,(int)extremityR[0].x-(int)BorderRight.transform.localScale.x)+1,
+							extremityL[0].y,
+							rdm.Next((int)extremityR[1].z,(int)extremityR[0].z));
 	}
 	
 	public GameObject createRandomBlock(Vector3[] extremityR,Vector3[] extremityL)
 	{
 		Vector3 pos = createRandomCoord(extremityR,extremityL);
 		GameObject tmp = Instantiate(getRandomInList(),pos,Quaternion.identity);
-		tmp.transform.eulerAngles = new Vector3(0,0,getRandomRotation(tmp.GetComponent<Block>()));
+		tmp.transform.eulerAngles = new Vector3(90,getRandomRotation(tmp.GetComponent<Block>()),0);
 		tmp.GetComponent<Block>().scriptBlockGen = this;
 		return tmp;
 	}
@@ -173,7 +176,7 @@ public class BlockGeneration : MonoBehaviour
 		{
 			GameObject tmp = Instantiate(coins,createRandomCoord(extremityR,extremityL),Quaternion.identity);
 			tmp.GetComponent<Coins>().scriptBlockGen = this;
-			tmp.transform.eulerAngles = new Vector3(90,0,0);
+			tmp.transform.eulerAngles = new Vector3(0,0,0);
 			i ++;
 		}
 	}

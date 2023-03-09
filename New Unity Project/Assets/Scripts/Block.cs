@@ -82,14 +82,14 @@ public class Block : MonoBehaviour
 		Vector3 o_center = other.bounds.center;
 		Vector3 pos = this.gameObject.transform.position;
 		//Debug.Log(o_center + " | " + pos);
-		int x = 0,y = 0,dir = 0;
+		int x = 0,z = 0,dir = 0;
 		if (pos == o_center)
 		{
 			dir = rdm.Next(0,4);
 			if ((float)dir/2f >= 1f)
 				pos.x += dir%2*(-1)*other.bounds.size.x; //*Time.deltaTime;
 			else
-				pos.y += dir%2*(-1)*other.bounds.size.y; //* Time.deltaTime;
+				pos.z += dir%2*(-1)*other.bounds.size.z; //* Time.deltaTime;
 		}
 		else
 		{
@@ -103,18 +103,18 @@ public class Block : MonoBehaviour
 				x = 2;
 				pos.x -= this.deltaMove; // * Time.deltaTime;
 			}
-			if (this.gameObject.transform.position.y > o_center.y)
+			if (this.gameObject.transform.position.z > o_center.z)
 			{
-				y = 1;
-				pos.y += this.deltaMove; // * Time.deltaTime;
+				z = 1;
+				pos.z += this.deltaMove; // * Time.deltaTime;
 			}
-			else if (this.gameObject.transform.position.y < o_center.y)
+			else if (this.gameObject.transform.position.z < o_center.z)
 			{
-				y = 2;
-				pos.y -= this.deltaMove; // * Time.deltaTime;
+				z = 2;
+				pos.z -= this.deltaMove; // * Time.deltaTime;
 			}
 		}
-		/*if (previousAction[0][0] == x && previousAction[0][1] == y && previousAction[1][0] != x && previousAction[1][1] != y)
+		/*if (previousAction[0][0] == x && previousAction[0][1] == z && previousAction[1][0] != x && previousAction[1][1] != z)
 		{
 			Debug.Log("Destroy    "  +this.gameObject.name);
 			this.gameObject.transform.position = pos;
@@ -124,7 +124,7 @@ public class Block : MonoBehaviour
 		{*/
 			conteur += 1;
 			this.gameObject.transform.position = pos;
-			previousAction = new int[][]{new int[]{previousAction[1][0],previousAction[1][1]},new int[]{x,y}};
+			previousAction = new int[][]{new int[]{previousAction[1][0],previousAction[1][1]},new int[]{x,z}};
 		//}
 		
 	}
@@ -210,7 +210,7 @@ public class Block : MonoBehaviour
 	
 	public bool checkAlone()
 	{
-		Vector3 scaleCollide = new Vector3(this.gameObject.transform.localScale.x/2.2f,this.gameObject.transform.localScale.y/2.2f,this.gameObject.transform.localScale.z);
+		Vector3 scaleCollide = new Vector3(this.gameObject.transform.localScale.x/2.2f,this.gameObject.transform.localScale.y,this.gameObject.transform.localScale.z/2.2f);
 		RaycastHit[] hits = Physics.BoxCastAll(this.gameObject.transform.position,scaleCollide,this.gameObject.transform.forward,Quaternion.identity);
 		if (!checkTrulyNotAlone(hits))
 		{

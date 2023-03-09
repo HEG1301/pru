@@ -369,6 +369,10 @@
 "Assets/Scripts/fromGame.cs"
 "Assets/Scripts/goToGame.cs"
 "Assets/Scripts/Menu.cs"
+"Assets/Scripts/NavMeshComponents/Scripts/NavMeshLink.cs"
+"Assets/Scripts/NavMeshComponents/Scripts/NavMeshModifier.cs"
+"Assets/Scripts/NavMeshComponents/Scripts/NavMeshModifierVolume.cs"
+"Assets/Scripts/NavMeshComponents/Scripts/NavMeshSurface.cs"
 "Assets/Scripts/PlayerInGame.cs"
 "Assets/Scripts/Shark.cs"
 -langversion:9.0
