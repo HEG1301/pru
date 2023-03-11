@@ -2,12 +2,15 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = System.Random;
 
 public class BlockGeneration : MonoBehaviour
 {
 	public GameObject coins;
 	public GameObject[] BlockList;
+	public GameObject NavMesh;
+	public GameObject Plane;
 	public GameObject BorderRight;
 	public GameObject BorderLeft;
 	public Random rdm;
@@ -43,7 +46,9 @@ public class BlockGeneration : MonoBehaviour
 		// BorderRight.transform.localScale *= 2;
 		BorderRight.GetComponent<Border>().expand();
 		BorderLeft.GetComponent<Border>().expand();
-		
+		Plane.GetComponent<Border>().expand();
+		Vector3 pos = Plane.GetComponent<Transform>().position;
+		Plane.GetComponent<Transform>().position = new Vector3(pos.x,pos.y,BorderLeft.GetComponent<Transform>().position.z);
 		
 		Border ScriptRight = BorderRight.GetComponent<Border>();
 		Border ScriptLeft = BorderLeft.GetComponent<Border>();
@@ -70,6 +75,10 @@ public class BlockGeneration : MonoBehaviour
 			i ++;
 		}
 		Debug.Log("i = " + i);
+		
+		Plane.SetActive(true);
+		NavMesh.GetComponent<NavMeshSurface>().BuildNavMesh();
+		Plane.SetActive(false);
 	}
 
     // Update is called once per frame
@@ -88,9 +97,18 @@ public class BlockGeneration : MonoBehaviour
 			Debug.Log("create section");
 			BorderRight.GetComponent<Border>().expand();
 			BorderLeft.GetComponent<Border>().expand();
+		}
+		if (Input.GetKeyUp(KeyCode.J))
+		{
+			Debug.Log("expand");
+			Plane.GetComponent<Border>().expand();
+			Plane.SetActive(true);
+			NavMesh.GetComponent<NavMeshSurface>().BuildNavMesh();
+		}
+		if (Input.GetKeyUp(KeyCode.Space))
+		{
 			
 		}
-		
 		if (Input.GetKeyUp(KeyCode.A))
 		{
 			Vector3[] extremity = BorderRight.GetComponent<Border>().getNewSectorExtremity();

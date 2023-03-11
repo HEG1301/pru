@@ -359,6 +359,7 @@
 "Assets/Scripts/BlockGeneration.cs"
 "Assets/Scripts/Border.cs"
 "Assets/Scripts/Button_Input.cs"
+"Assets/Scripts/Cave.cs"
 "Assets/Scripts/Coins.cs"
 "Assets/Scripts/DataPlayer.cs"
 "Assets/Scripts/Equipment/Equipment.cs"
