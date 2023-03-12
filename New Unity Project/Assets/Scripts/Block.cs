@@ -23,6 +23,7 @@ public class Block : MonoBehaviour
 	public int nbrAngle;
 	private float[] lengthRay;
 	private Random rdm;
+	public int damage;
 	
 	void Start()
 	{
@@ -66,6 +67,10 @@ public class Block : MonoBehaviour
 				}
 				tryMove(other);
 				//Destroy(this.gameObject);
+			}
+			if (other.gameObject.tag == "Player")
+			{
+				other.gameObject.GetComponent<PlayerInGame>().lifeCurent -= this.damage * Time.deltaTime;
 			}
 		}
 	}

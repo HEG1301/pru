@@ -8,7 +8,15 @@ public class Cave : MonoBehaviour
 	public PlayerInGame tempPlayer;
 	void Start()
 	{
-		this.cor = addOxy();
+	}
+	
+	void Update()
+	{
+		if (tempPlayer != null)
+		{
+			if (tempPlayer.OxyCurent < tempPlayer.OxyMax)
+				tempPlayer.OxyCurent += 0.15f*Time.deltaTime;
+		}
 	}
     // Start is called before the first frame update
     void OnTriggerEnter(Collider other)
@@ -16,8 +24,8 @@ public class Cave : MonoBehaviour
 		if (other.gameObject.tag == "Player")
 		{
 			tempPlayer = other.gameObject.GetComponent<PlayerInGame>();
-			tempPlayer.curentApnee = tempPlayer.maxApnee; 
-			StartCoroutine(cor);
+			tempPlayer.curentApnee = tempPlayer.maxApnee;
+			tempPlayer.inCave = true;
 		}
 	}
 	
@@ -26,16 +34,8 @@ public class Cave : MonoBehaviour
 		if (other.gameObject.tag == "Player")
 		{
 			//StopCoroutine(cor);
+			other.gameObject.GetComponent<PlayerInGame>().inCave = false;
 			tempPlayer = null;
-		}
-	}
-	
-	IEnumerator addOxy()
-	{
-		while (tempPlayer != null)
-		{
-			tempPlayer.OxyCurent += 0.15f * Time.deltaTime;
-			yield return new WaitForSeconds(0.001f);
 		}
 	}
 }

@@ -21,7 +21,8 @@ public class PlayerInGame : MonoBehaviour
 	public float lifeCurent;
 	public float OxyMax;
 	public float OxyCurent;
-	private bool atSurface;
+	private bool atSurface = false;
+	public bool inCave = false;
 	
 	public float maxApnee;
 	public float curentApnee;
@@ -84,14 +85,21 @@ public class PlayerInGame : MonoBehaviour
 		this.sliderLife.value = lifeCurent;
 		this.sliderApnee.value = curentApnee;
 		this.sliderOxy.value = OxyCurent;
+		float perteOxy = 1.66f;
+		bool isRunning = false;
+		if (Input.GetKey(KeyCode.LeftShift))
+		{
+			isRunning = true;
+			perteOxy = 2;
+		}
 		if (this.Die)
 			return;
-		if (!this.atSurface)
+		if (!this.atSurface && !this.inCave)
 			if (this.OxyCurent <= 0)
 			{	
 				if (this.curentApnee > 0)
 				{
-					this.curentApnee -= 1f * Time.deltaTime;
+					this.curentApnee -= perteOxy * Time.deltaTime;
 				}
 				else
 				{
@@ -102,9 +110,9 @@ public class PlayerInGame : MonoBehaviour
 			}
 			else
 			{
-				this.OxyCurent -= 1f * Time.deltaTime;
+				this.OxyCurent -= perteOxy * Time.deltaTime;
 			}
-		else
+		else if (this.atSurface)
 		{
 			if (this.OxyCurent < OxyMax)
 			{
@@ -143,9 +151,7 @@ public class PlayerInGame : MonoBehaviour
 		//pos.Normalize();
 		this.transform.position = pos;
 		*/
-		bool isRunning = false;
-		if (Input.GetKey(KeyCode.LeftShift))
-			isRunning = true;
+		
 		Vector3 dir = new Vector3(0,0,0);
 		this.gameObject.GetComponent<Rigidbody>().velocity = dir;
 		if (Input.GetKey(KeyCode.DownArrow))
@@ -169,6 +175,13 @@ public class PlayerInGame : MonoBehaviour
 			dir.x = -1;
 		}
 		//Debug.Log(dir);
+		float[] t = getAngle(dir);
+		Vector3 test = new Vector3(90,0,t[0]);
+		this.transform.eulerAngles = test;
+		Vector3 test2 = this.gameObject.GetComponentInChildren<Camera>().gameObject.transform.eulerAngles;
+		this.gameObject.GetComponentInChildren<Camera>().gameObject.transform.eulerAngles = new Vector3(test2.x,t[1],test2.z);
+		if ((dir.z + dir.x)%2!=0)
+			dir *= 1.5f;
 		this.gameObject.GetComponent<Rigidbody>().AddForce(dir*speed*(1+((isRunning)?0.5f:0)),ForceMode.Impulse);
     }
 	
@@ -194,4 +207,43 @@ public class PlayerInGame : MonoBehaviour
 		DontDestroyOnLoad(tmp);
 		SceneManager.LoadScene("Menu");
 	}
+	
+	public float[] getAngle(Vector3 dir)
+	{
+		if (dir.x != 0 && dir.z != 0)
+		{
+			if (dir.x == dir.z)
+			{
+				if (dir.x == -1)
+					return new float[]{135,0};
+				else
+					return new float[]{315,0};
+			}
+			else
+				if (dir.x == -1)
+					return new float[]{45,0};
+				else
+					return new float[]{225,0};
+		}
+		else if (dir.x != 0)
+		{
+			if (dir.x == -1)
+				return new float[]{90,0};
+			else
+				return new float[]{270,0};
+		}
+		else if (dir.z != 0)
+		{
+			if (dir.z == -1)
+				return new float[]{180,0};
+			else
+				return new float[]{0,0};
+		}
+		else
+			return new float[]{0,0};
+	}
 }
+
+
+
+

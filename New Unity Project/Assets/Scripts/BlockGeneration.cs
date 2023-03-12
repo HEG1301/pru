@@ -149,7 +149,14 @@ public class BlockGeneration : MonoBehaviour
 	
 	public GameObject getRandomInList()
 	{
-		return BlockList[rdm.Next(0,BlockList.Length)];
+		int x = rdm.Next(0,100);
+		if (x < 5)
+			x = BlockList.Length - 1;
+		else if (x < 30)
+			x = 0;
+		else
+			x = (BlockList.Length>=1)?1:0;
+		return BlockList[x];
 	}
 	
 	public int getRandomRotation(Block script)
