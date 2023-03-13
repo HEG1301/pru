@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -25,7 +26,7 @@ public class Shark : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		GameObject tmp = this.transform.Find("Player").gameObject;
+		GameObject tmp = GameObject.FindWithTag("Player").gameObject;
 		target = (getDistanceOk(tmp.transform.position,distance))?tmp:null;
 		
 		if (target != null)
@@ -36,12 +37,26 @@ public class Shark : MonoBehaviour
 			{
 				if ((navMesh.remainingDistance <= navMesh.stoppingDistance) && (navMesh.velocity.magnitude == 0))
 				{
-					navMesh.SetDestination(newDestination());
+					try{
+						Vector3 newDest = newDestination();
+						Debug.Log(newDest);
+						navMesh.SetDestination(newDest);
+					}catch (Exception e)
+					{	
+						Debug.LogWarning(e);
+					}
 				}
 			}
 			else
 			{
-				navMesh.SetDestination(newDestination());
+				try{
+					Vector3 newDest = newDestination();
+					Debug.Log(newDest);
+					navMesh.SetDestination(newDest);
+				}catch (Exception e)
+				{	
+					Debug.LogWarning(e);
+				}
 			}
 		}
     }
@@ -49,7 +64,7 @@ public class Shark : MonoBehaviour
 	public Vector3 newDestination()
 	{
 		Random rdm = new Random();
-		return new Vector3(rdm.Next((int)xMin+1,(int)xMax),this.transform.position.y,rdm.Next((int)zMin+1,(int)zMax));
+		return new Vector3(rdm.Next((int)xMin+1,(int)xMax),0,rdm.Next((int)zMin+1,(int)zMax));
 	}
 	
 	void OnColliderStay(Collider other)

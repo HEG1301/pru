@@ -8,6 +8,7 @@ using Random = System.Random;
 public class BlockGeneration : MonoBehaviour
 {
 	public GameObject coins;
+	public GameObject shark;
 	public GameObject[] BlockList;
 	public GameObject NavMesh;
 	public GameObject Plane;
@@ -76,9 +77,19 @@ public class BlockGeneration : MonoBehaviour
 		}
 		Debug.Log("i = " + i);
 		
+		Vector3 posShark = createRandomCoord(new Vector3[]{extremityR[0]*0.9f,extremityR[1]*0.9f},new Vector3[]{extremityL[0]*0.9f,extremityL[1]*0.9f});
+		GameObject sharkTmp = Instantiate(shark,new Vector3(posShark.x,0,posShark.z),Quaternion.identity);
+		sharkTmp.transform.eulerAngles = new Vector3(0,0,0);
+		Shark scriptShark = sharkTmp.GetComponent<Shark>();
+		scriptShark.speed = this.gameObject.GetComponentInParent<PlayerInGame>().speed + 1;
+		scriptShark.damage = 25;
+		scriptShark.xMin = BorderLeft.transform.position.x;
+		scriptShark.xMax = BorderRight.transform.position.x;
+		scriptShark.zMin = extremityL[1].z;
+		scriptShark.zMax = extremityL[0].z;
 		Plane.SetActive(true);
 		NavMesh.GetComponent<NavMeshSurface>().BuildNavMesh();
-		Plane.SetActive(false);
+		//Plane.SetActive(false);
 	}
 
     // Update is called once per frame
