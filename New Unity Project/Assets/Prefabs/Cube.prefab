@@ -134,7 +134,7 @@ MonoBehaviour:
   conteur: 0
   scriptBlockGen: {fileID: 0}
   nbrAngle: 4
-  damage: 0
+  damage: 10
 --- !u!65 &4644410538491894188
 BoxCollider:
   m_ObjectHideFlags: 0

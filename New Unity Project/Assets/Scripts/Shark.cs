@@ -25,38 +25,37 @@ public class Shark : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+	{ 
+		//Debug.Log(navMesh);
 		GameObject tmp = GameObject.FindWithTag("Player").gameObject;
 		target = (getDistanceOk(tmp.transform.position,distance))?tmp:null;
 		
 		if (target != null)
+		{
+			Debug.Log(target);
 			navMesh.SetDestination(target.transform.position);
+			if ((navMesh.remainingDistance <= navMesh.stoppingDistance))
+			{
+				Debug.LogError("this is working");
+				target.gameObject.GetComponent<PlayerInGame>().lifeCurent -= damage*Time.deltaTime;
+			}
+		}
 		else
 		{
 			if (navMesh.hasPath)
 			{
-				if ((navMesh.remainingDistance <= navMesh.stoppingDistance) && (navMesh.velocity.magnitude == 0))
+				if ((navMesh.remainingDistance <= navMesh.stoppingDistance))
 				{
-					try{
-						Vector3 newDest = newDestination();
-						Debug.Log(newDest);
-						navMesh.SetDestination(newDest);
-					}catch (Exception e)
-					{	
-						Debug.LogWarning(e);
-					}
+					Vector3 newDest = newDestination();
+					Debug.Log(newDest);
+					navMesh.SetDestination(newDest);
 				}
 			}
 			else
 			{
-				try{
-					Vector3 newDest = newDestination();
-					Debug.Log(newDest);
-					navMesh.SetDestination(newDest);
-				}catch (Exception e)
-				{	
-					Debug.LogWarning(e);
-				}
+				Vector3 newDest = newDestination();
+				Debug.Log(newDest);
+				navMesh.SetDestination(newDest);
 			}
 		}
     }
@@ -64,13 +63,27 @@ public class Shark : MonoBehaviour
 	public Vector3 newDestination()
 	{
 		Random rdm = new Random();
-		return new Vector3(rdm.Next((int)xMin+1,(int)xMax),0,rdm.Next((int)zMin+1,(int)zMax));
+		return new Vector3(rdm.Next((int)xMin+1,(int)xMax),-0.25f,rdm.Next((int)zMin+1,(int)zMax));
 	}
-	
+	void OnColliderEnter(Collider other)
+	{
+		if (other.gameObject.tag == "Player")
+		{
+			other.gameObject.GetComponent<PlayerInGame>().lifeCurent -= damage;
+		}
+	}
+	void OnColliderExit(Collider other)
+	{
+		if (other.gameObject.tag == "Player")
+		{
+			other.gameObject.GetComponent<PlayerInGame>().lifeCurent -= damage;
+		}
+	}
 	void OnColliderStay(Collider other)
 	{
 		if (other.gameObject.tag == "Player")
 		{
+			Debug.LogWarning("this is working");
 			other.gameObject.GetComponent<PlayerInGame>().lifeCurent -= damage*Time.deltaTime;
 		}
 	}

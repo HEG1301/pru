@@ -15,7 +15,7 @@ public class Cave : MonoBehaviour
 		if (tempPlayer != null)
 		{
 			if (tempPlayer.OxyCurent < tempPlayer.OxyMax)
-				tempPlayer.OxyCurent += 0.15f*Time.deltaTime;
+				tempPlayer.OxyCurent += 0.5f*Time.deltaTime;
 		}
 	}
     // Start is called before the first frame update

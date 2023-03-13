@@ -77,18 +77,21 @@ public class BlockGeneration : MonoBehaviour
 		}
 		Debug.Log("i = " + i);
 		
+		Plane.SetActive(true);
+		NavMesh.GetComponent<NavMeshSurface>().BuildNavMesh();
 		Vector3 posShark = createRandomCoord(new Vector3[]{extremityR[0]*0.9f,extremityR[1]*0.9f},new Vector3[]{extremityL[0]*0.9f,extremityL[1]*0.9f});
-		GameObject sharkTmp = Instantiate(shark,new Vector3(posShark.x,0,posShark.z),Quaternion.identity);
+		//posShark = new Vector3(0,0,0);
+		GameObject sharkTmp = Instantiate(shark,new Vector3(posShark.x,Plane.transform.position.y,posShark.z),Quaternion.identity);
 		sharkTmp.transform.eulerAngles = new Vector3(0,0,0);
 		Shark scriptShark = sharkTmp.GetComponent<Shark>();
 		scriptShark.speed = this.gameObject.GetComponentInParent<PlayerInGame>().speed + 1;
-		scriptShark.damage = 25;
+		scriptShark.damage = 15;
 		scriptShark.xMin = BorderLeft.transform.position.x;
 		scriptShark.xMax = BorderRight.transform.position.x;
 		scriptShark.zMin = extremityL[1].z;
 		scriptShark.zMax = extremityL[0].z;
-		Plane.SetActive(true);
-		NavMesh.GetComponent<NavMeshSurface>().BuildNavMesh();
+		//Plane.SetActive(true);
+		//NavMesh.GetComponent<NavMeshSurface>().BuildNavMesh();
 		//Plane.SetActive(false);
 	}
 

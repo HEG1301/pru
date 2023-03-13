@@ -37,11 +37,12 @@ public class PlayerInGame : MonoBehaviour
     void Start()
     {		
 		GameObject temp = GameObject.Find("ScriptsCarrier");
-		Debug.Log(temp);
+		//Debug.Log(temp);
 		if (temp == null)
 		{
 			this.OxyMax = 24f/12f*60f;    //= capacity tank / 12 L * 60 => capacity tank by default will be 24, 12 L = we consum 12 L of oxy per minute when diving, * 60 convert minute to second
-			this.maxApnee = 45f;           //default apnee time;
+			this.maxApnee = 45f; 			//default apnee time;
+			this.lifeMax = 100f;
 			this.speed = 10f/3;
 			this.damage = 20f;
 			this.right = KeyCode.RightArrow;
@@ -116,7 +117,7 @@ public class PlayerInGame : MonoBehaviour
 		{
 			if (this.OxyCurent < OxyMax)
 			{
-				this.OxyCurent += 0.25f * Time.deltaTime;
+				this.OxyCurent += 1 * Time.deltaTime;
 			}
 			if (this.OxyCurent > OxyMax)
 			{
