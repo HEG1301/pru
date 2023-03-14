@@ -78,7 +78,10 @@ public class PlayerInGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		
+		if (this.transform.position.z >= 14f)
+			this.transform.position = new Vector3(this.transform.position.x,this.transform.position.y,14f);
+		if (this.transform.position.z >= 13.5f)
+			this.atSurface = true;
 		if (Input.GetKeyUp(KeyCode.Escape))
 		{
 			toGame();
