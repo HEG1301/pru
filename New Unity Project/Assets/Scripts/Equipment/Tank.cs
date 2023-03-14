@@ -38,11 +38,14 @@ public class Tank : Equipment
 	{
 		if (gold >= this.costUpgrade)
 		{
+			
+			this.level += 1;
 			this.oxyCapacity += this.level / 5;
 			this.malusDexterity += 0.025f;
 			this.malusStrenght += 0.05f;
 			return this.costUpgrade;
 		}
+		//this.level += 1;
 		return -1;
 	}
 	

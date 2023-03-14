@@ -27,18 +27,18 @@ public class Equipment
 		this.isBougth = false;
 	}
 	
-	private void updateCostUpgrade()
+	public void updateCostUpgrade()
 	{
-		if (level%5 == 0)
-		{
-			this.costUpgrade /= 10;
-			this.costGold = false;
-		}
-		else if (!costGold)
+		if (!costGold)
 		{
 			this.costUpgrade *= 20;
 			this.costGold = true;
 		}
+		/*else if ((level+1)%5 == 0)
+		{
+			this.costUpgrade /= 10;
+			this.costGold = false;
+		} */
 		else
 		{
 			this.costUpgrade *= 2;

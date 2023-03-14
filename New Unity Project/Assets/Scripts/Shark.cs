@@ -36,7 +36,7 @@ public class Shark : MonoBehaviour
 			navMesh.SetDestination(target.transform.position);
 			if ((navMesh.remainingDistance <= navMesh.stoppingDistance))
 			{
-				Debug.LogError("this is working");
+				//Debug.LogError("this is working");
 				target.gameObject.GetComponent<PlayerInGame>().lifeCurent -= damage*Time.deltaTime;
 			}
 		}

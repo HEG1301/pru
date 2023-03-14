@@ -322,7 +322,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 36693308}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1011036819}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: upgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &36693308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3159,7 +3171,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 214171424}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1011036819}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: upgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &214171424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4237,7 +4261,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 273699928}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1011036819}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: upgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &273699928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8183,7 +8219,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 576908082}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1011036819}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: upgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &576908082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15031,6 +15079,14 @@ MonoBehaviour:
   imageTank: {fileID: 22550822}
   imagePalm: {fileID: 718110637}
   imageSuit: {fileID: 703960877}
+  textWeapon: {fileID: 1714029461}
+  textTank: {fileID: 2091072934}
+  textPalm: {fileID: 987610236}
+  textSuit: {fileID: 950892057}
+  textCostUpWeapon: {fileID: 2030541252}
+  textCostUpTank: {fileID: 1041561835}
+  textCostUpPalm: {fileID: 2083176711}
+  textCostUpSuit: {fileID: 1384648644}
   rigthinput: {fileID: 2086513726}
   leftinput: {fileID: 845342464}
   divinginput: {fileID: 80231255}

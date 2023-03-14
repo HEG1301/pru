@@ -283,11 +283,15 @@ public class DataPlayer //: MonoBehaviour
 	
 	public bool upgradeEquipment(int index)
 	{
-		int tmp = equipments[index].upgrade(this.gold);
-		if (tmp != -1)
+		if (equipments[index] != null)
 		{
-			this.gold -= tmp;
-			return true;
+			int tmp = equipments[index].upgrade((equipments[index].costGold)?this.gold:this.gem);
+			if (tmp != -1)
+			{
+				equipments[index].updateCostUpgrade();
+				this.gold -= tmp;
+				return true;
+			}
 		}
 		return false;
 	}

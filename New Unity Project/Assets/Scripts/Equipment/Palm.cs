@@ -31,6 +31,7 @@ public class Palm : Equipment
 	{
 		if (gold >= this.costUpgrade)
 		{
+			this.level += 1;
 			this.bonusStrenght += 0.025f;
 			return this.costUpgrade;
 		}

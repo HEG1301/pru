@@ -31,9 +31,11 @@ public class Suit : Equipment
 	{
 		if (gold >= this.costUpgrade)
 		{
+			this.level += 1;
 			this.bonusDexterity += 0.025f;
 			return this.costUpgrade;
 		}
+		
 		return -1;
 	}
 	

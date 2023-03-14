@@ -55,6 +55,14 @@ public class Menu : MonoBehaviour
 	public Image imageTank;
 	public Image imagePalm;
 	public Image imageSuit;
+	public TextMeshProUGUI textWeapon;
+	public TextMeshProUGUI textTank;
+	public TextMeshProUGUI textPalm;
+	public TextMeshProUGUI textSuit;
+	public TextMeshProUGUI textCostUpWeapon;
+	public TextMeshProUGUI textCostUpTank;
+	public TextMeshProUGUI textCostUpPalm;
+	public TextMeshProUGUI textCostUpSuit;
 	/*
 	public Image hpRessourceImg;
 	public Image dexRessourceImg;
@@ -210,7 +218,14 @@ public class Menu : MonoBehaviour
 		this.dexCostText.text = "" + this.player.costDexterity;
 		this.strCostText.text = ""  + this.player.costStrenght;
 	
-		
+		this.textWeapon.text = (this.player.equipments[3] != null)?"Weapon    Level" + this.player.equipments[3].level:"No Weapon Select";
+		this.textTank.text = (this.player.equipments[0] != null)?"Tank    Level" + this.player.equipments[0].level:"No Tank Select";
+		this.textPalm.text = (this.player.equipments[1] != null)?"Suit    Level" + this.player.equipments[1].level:"No Suit Select";
+		this.textSuit.text = (this.player.equipments[2] != null)?"Palm    Level" + this.player.equipments[2].level:"No Palm Select";
+		this.textCostUpWeapon.text = "cost:\n" + ((this.player.equipments[3] != null)?this.player.equipments[3].costUpgrade +"":0+"");
+		this.textCostUpTank.text = "cost:\n" + ((this.player.equipments[0] != null)?this.player.equipments[0].costUpgrade +"":0+"");
+		this.textCostUpPalm.text = "cost:\n" + ((this.player.equipments[1] != null)?this.player.equipments[1].costUpgrade +"":0+"");
+		this.textCostUpSuit.text = "cost:\n" + ((this.player.equipments[2] != null)?this.player.equipments[2].costUpgrade +"":0+"");
 		
 		//Debug.Log("test");
 		

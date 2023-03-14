@@ -30,9 +30,11 @@ public class Weapon : Equipment
 	{
 		if (gold >= this.costUpgrade)
 		{
+			this.level += 1;
 			this.damage += 5;
 			return this.costUpgrade;
 		}
+		
 		return -1;
 	}
 	
