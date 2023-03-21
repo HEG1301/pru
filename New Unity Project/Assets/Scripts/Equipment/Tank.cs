@@ -51,7 +51,7 @@ public class Tank : Equipment
 	
 	public override string ParseToString()
 	{
-		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried + "," + this.oxyCapacity + "," + this.malusStrenght + "," + this.malusDexterity;
+		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried + "," + this.oxyCapacity + "," + this.malusStrenght + "," + this.malusDexterity+ "," + this.isBougth;
 	}
 	
 	public string getDescription()

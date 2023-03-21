@@ -40,11 +40,11 @@ public class Palm : Equipment
 	
 	public override string ParseToString()
 	{
-		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried + "," + this.bonusStrenght;
+		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried + "," + this.bonusStrenght+ "," + this.isBougth;
 	}
 	
 	public string getDescription()
 	{
-		return "this weapon is adding a bonus in strenght up to: " + this.bonusStrenght;
+		return "this palm is adding a bonus in strenght up to: " + this.bonusStrenght;
 	}
 }

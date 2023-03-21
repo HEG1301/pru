@@ -40,7 +40,7 @@ public class Weapon : Equipment
 	
 	public override string ParseToString()
 	{
-		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried + "," + this.damage;
+		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried + "," + this.damage + "," + this.isBougth;
 	}
 	
 	public string getDescription()

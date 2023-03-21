@@ -41,11 +41,11 @@ public class Suit : Equipment
 	
 	public override string ParseToString()
 	{
-		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried + "," + this.bonusDexterity;
+		return this.goldPrice + "," + this.gemPrice + "," + this.level + "," + this.costUpgrade + "," + this.costGold + "," + this.isCarried + "," + this.bonusDexterity + "," + this.isBougth;
 	}
 	
 	public string getDescription()
 	{
-		return "this weapon is adding a bonus in dexterity up to: " + this.bonusDexterity;
+		return "this Suit is adding a bonus in dexterity up to: " + this.bonusDexterity;
 	}
 }

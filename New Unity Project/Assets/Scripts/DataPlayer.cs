@@ -60,7 +60,7 @@ public class DataPlayer //: MonoBehaviour
 		this.numberOfDeathByPredator = 0;
 		this.numberOfPredatorHunt = 0;
 		this.numberOfDivingDone = 0;
-		this.equipments = new Equipment[4];       //[tank,suit,palm,weapon]
+		this.equipments = new Equipment[]{null,null,null,null};       //[tank,suit,palm,weapon]
 		this.weapons = new List<Weapon>(){new Weapon(50,10,30),new Weapon(50,20,150),new Weapon(75,40,250),new Weapon(75,100,1000)};
 		this.palms = new List<Palm>(){new Palm(50,1.25f,100),new Palm(40,1.3f,200),new Palm(80,1.5f,500),new Palm(50,1.5f,750)};
 		this.tanks = new List<Tank>(){new Tank(12,50,0.5f,0.75f,50),new Tank(24,75,0.6f,0.8f,750),new Tank(24,100,0.4f,0.5f,1100),new Tank(48,250,0.4f,0.5f,1750)};
@@ -298,13 +298,14 @@ public class DataPlayer //: MonoBehaviour
 	
 	public float statAndBonusEquipement(string stat)
 	{
-		Tank tank = (equipments.Length > 0)?(Tank)this.equipments[0]:null;
-		Suit suit = (equipments.Length > 0)?(Suit)this.equipments[1]:null;
-		Palm palm = (equipments.Length > 0)?(Palm)this.equipments[2]:null;
-		Weapon weapon = (equipments.Length > 0)?(Weapon)this.equipments[3]:null;
+		//Debug.Log(equipments[0].GetType() == typeof(Tank));
+		Tank tank = (equipments[0].GetType() == typeof(Tank))?((Tank)this.equipments[0]):null;
+		Suit suit = (equipments[0].GetType() == typeof(Suit))?(Suit)this.equipments[1]:null;
+		Palm palm = (equipments[0].GetType() == typeof(Palm))?(Palm)this.equipments[2]:null;
+		Weapon weapon = (equipments[0].GetType() == typeof(Weapon))?(Weapon)this.equipments[3]:null;
 		
-		float tmpStrength = this.strenght*(((palm != null)?palm.bonusStrenght:1f) - ((tank != null)?tank.malusStrenght:0f));
-		float tmpDext = this.dexterity*(((suit != null)?suit.bonusDexterity:1f) - ((tank != null)?tank.malusDexterity:0f));
+		float tmpStrength = this.strenght*(((palm != null)?palm.bonusStrenght+1:1f) - ((tank != null)?tank.malusStrenght:0f));
+		float tmpDext = this.dexterity*(((suit != null)?suit.bonusDexterity+1:1f) - ((tank != null)?tank.malusDexterity:0f));
 		switch (stat)
 		{
 			case "damage":
@@ -313,9 +314,10 @@ public class DataPlayer //: MonoBehaviour
 				return 10;
 			case "oxy":
 				if (tank != null)
-					return tank.oxyCapacity * 60f / (float)(20-(int)(this.level / 5));
+					return 60+ tank.oxyCapacity * 60f / (float)(20-(int)(this.level / 5));
 				return 0f;
 			case "speed":
+				Debug.Log(tmpStrength + "    -   " + tmpDext);
 				return (tmpStrength/4f + tmpDext/5f);
 			case "life":
 				return this.maxLife;
